@@ -1,0 +1,121 @@
+/* --------------------header-------------------- */
+
+header {
+    width: 100%;
+    height: 730px;
+    margin: 0 auto;
+    position: relative;
+}
+
+header .shade {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    z-index: 500;
+}
+
+header .images {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 300;
+}
+
+header .images ul {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+header .images li {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+header .images a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+header .images img {
+    width: 100%;
+    height: 100%;
+}
+
+header .circle {
+    position: absolute;
+    top: 650px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 700;
+    padding: 5px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+}
+
+header .circle li {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(100, 100, 100, 0.8);
+    float: left;
+    margin: 0 5px;
+}
+
+header .slideshow {
+    position: absolute;
+    top: 215px;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    z-index: 700;
+}
+
+header .slideshow li {
+    width: 125px;
+    height: 300px;
+}
+
+header .slideshow li:nth-child(1) {
+    float: left;
+}
+
+header .slideshow li:nth-child(2) {
+    float: right;
+}
+
+header .slideshow li button {
+    width: 40px;
+    height: 60px;
+    cursor: pointer;
+    background-color: rgba(100, 100, 100, 0.5);
+    color: white;
+    /* 隐藏轮播按钮 */
+    display: none;
+    border-color: #42424223;
+}
+
+header .slideshow li button:active {
+    border-color: #474747;
+}
+
+header .slideshow li:nth-child(1) button {
+    margin: 120px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 28px;
+}
+
+header .slideshow li:nth-child(2) button {
+    margin: 120px 0 120px 85px;
+    border-radius: 8px 0 0 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header .slideshow li:hover button {
+    display: block;
+}

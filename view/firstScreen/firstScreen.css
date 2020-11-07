@@ -1,0 +1,558 @@
+/* --------------------#firstScreen-------------------- */
+
+#firstScreen {
+    width: 80%;
+    height: auto;
+    margin: 0 auto 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 400px 2fr;
+}
+
+#firstScreen article {
+    height: 400px;
+    position: relative;
+}
+
+#firstScreen .center {
+    float: left;
+    width: 50%;
+    padding: 0 25%;
+    height: 400px;
+    font-size: 0;
+}
+
+#firstScreen .center .shade {
+    width: 50%;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    z-index: 500;
+}
+
+#firstScreen .center .images {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 300;
+}
+
+#firstScreen .center .images ul {
+    width: 10000px;
+    height: 100%;
+    position: absolute;
+}
+
+#firstScreen .center .images li {
+    height: 100%;
+    display: inline-block;
+}
+
+#firstScreen .center .images a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#firstScreen .center .images img {
+    width: 100%;
+    height: 100%;
+}
+
+#firstScreen .center .circle {
+    position: absolute;
+    top: 350px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 700;
+    padding: 5px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+}
+
+#firstScreen .center .circle li {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(100, 100, 100, 0.8);
+    float: left;
+    margin: 0 5px;
+}
+
+#firstScreen .center .slideshow {
+    position: absolute;
+    top: 100px;
+    left: 25%;
+    width: 50%;
+    height: 200px;
+    z-index: 700;
+}
+
+#firstScreen .center .slideshow li {
+    width: 125px;
+    height: 200px;
+}
+
+#firstScreen .center .slideshow li:nth-child(1) {
+    float: left;
+}
+
+#firstScreen .center .slideshow li:nth-child(2) {
+    float: right;
+}
+
+#firstScreen .center .slideshow li button {
+    width: 40px;
+    height: 60px;
+    cursor: pointer;
+    background-color: rgba(100, 100, 100, 0.5);
+    color: white;
+    /* 隐藏轮播按钮 */
+    display: none;
+    border-color: #42424223;
+}
+
+#firstScreen .center .slideshow li button:active {
+    border-color: #474747;
+}
+
+#firstScreen .center .slideshow li:nth-child(1) button {
+    margin: 60px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 28px;
+}
+
+#firstScreen .center .slideshow li:nth-child(2) button {
+    margin: 60px 0 60px 85px;
+    border-radius: 8px 0 0 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#firstScreen .center .slideshow li:hover button {
+    display: block;
+}
+
+
+/* 左右公共 */
+
+#firstScreen .left,
+#firstScreen .right {
+    box-sizing: border-box;
+    float: left;
+    width: 25%;
+    height: 400px;
+    position: absolute;
+}
+
+#firstScreen .left .content,
+#firstScreen .right .content {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+#firstScreen .left .content .wrap,
+#firstScreen .right .content .wrap {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 左 */
+
+#firstScreen .left {
+    padding: 0 10px 0 0;
+    left: 0;
+}
+
+#firstScreen .left .content .wrap .head {
+    flex: 1;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px auto;
+}
+
+#firstScreen .left .content .wrap .head img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#firstScreen .left .content .wrap .message {
+    flex: 4;
+    background-color: unset;
+}
+
+
+/* 右 */
+
+#firstScreen .right {
+    padding: 0 0 0 10px;
+    right: 0;
+}
+
+#firstScreen .right .content .wrap h3 {
+    flex: 1;
+    font-size: 30px;
+    text-align: center;
+    line-height: 100px;
+}
+
+#firstScreen .right .content .wrap p {
+    flex: 3;
+}
+
+
+/* 隐藏滚动条 */
+
+
+/*IE10,IE11,IE12滚动条*/
+
+#firstScreen .message form {
+    -ms-scroll-chaining: chained;
+    -ms-overflow-style: none;
+    -ms-content-zooming: zoom;
+    -ms-scroll-rails: none;
+    -ms-content-zoom-limit-min: 100%;
+    -ms-content-ezoom-limit-max: 500%;
+    /* -ms-scroll-snap-type: proximity; */
+    -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
+    -ms-overflow-style: none;
+    /* overflow: auto; */
+    /* firefox滚动条 */
+    overflow: -moz-scrollbars-none;
+    overflow-y: scroll;
+    scrollbar-color: transparent transparent;
+    scrollbar-track-color: transparent;
+    -ms-scrollbar-track-color: transparent;
+}
+
+
+/* chrome,opera滚动条 */
+
+#firstScreen .message form::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+#firstScreen .message form::-o-scrollbar {
+    -moz-appearance: none !important;
+    background: rgba(0, 255, 0, 0) !important;
+}
+
+
+/* message */
+
+#firstScreen .message {
+    width: 100%;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+#firstScreen .message .wrap {
+    width: 80%;
+    height: 90%;
+    position: absolute;
+    z-index: 9000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#firstScreen .message .top {
+    width: 100%;
+    position: relative;
+    z-index: 9000;
+}
+
+#firstScreen .message .message_center {
+    width: 100%;
+    height: 83%;
+}
+
+#firstScreen .message .message_center ul {
+    width: 100%;
+    height: 5%;
+    overflow: hidden;
+    position: relative;
+    z-index: 9000;
+}
+
+#firstScreen .message .message_center li {
+    height: 100%;
+    box-sizing: border-box;
+    float: left;
+    width: calc(100%/6);
+    text-align: center;
+    background-color: lightcoral;
+    /* border: 1px solid black; */
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#firstScreen .message .message_center ul input {
+    width: calc(100% - 20px);
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-width: 1px 0 1px 1px;
+    border-color: black;
+    padding: 0 0 0 2px;
+}
+
+#firstScreen .message .message_center ul li:nth-of-type(4) label {
+    position: absolute;
+    width: 20px;
+    left: calc(50% - 20px);
+}
+
+#firstScreen .message .message_center ul li:nth-of-type(4) input:nth-of-type(1) {
+    width: calc(50% - 20px);
+    position: absolute;
+    left: 0;
+    border-width: 1px;
+}
+
+#firstScreen .message .message_center ul li:nth-of-type(4) input:nth-of-type(2) {
+    width: calc(50% - 20px);
+    position: absolute;
+    left: 50%;
+}
+
+#firstScreen .message .message_center input:focus {
+    outline: 0;
+}
+
+#firstScreen .message .message_center select {
+    width: 100%;
+    height: 100%;
+    border-color: black;
+    vertical-align: 1px;
+}
+
+#firstScreen .message .message_center select:focus {
+    outline: 0;
+}
+
+#firstScreen .message form {
+    width: 100%;
+    height: 95%;
+    /* background-color: blue; */
+    position: relative;
+    z-index: 9000;
+    cursor: pointer;
+}
+
+#firstScreen .message .message_center form td {
+    min-width: 40px;
+}
+
+#firstScreen .message .message_center form td button {
+    width: 50px;
+    background-image: linear-gradient(to left, rgb(255, 124, 2), rgb(255, 217, 0));
+    border-radius: 5px;
+    outline: none;
+}
+
+#firstScreen .message table {
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+#firstScreen .message table thead {
+    background-image: linear-gradient(to left, rgba(255, 124, 1, 0.5), rgba(251, 255, 0, 0.5));
+}
+
+#firstScreen .message table thead th {
+    border-radius: 3px;
+}
+
+#firstScreen .message table tbody {
+    background-image: linear-gradient(to left, rgba(51, 51, 51, 0.3), rgba(193, 193, 193, 0.3));
+}
+
+#firstScreen .message .message_center table a {
+    text-decoration: underline;
+    color: rgb(255, 85, 85);
+}
+
+#firstScreen .message canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#firstScreen .message .bottom {
+    width: 100%;
+    height: 10%;
+    position: relative;
+    z-index: 9000;
+    background-color: red;
+    display: flex;
+}
+
+#firstScreen .message .bottom .isAll {
+    flex: 7;
+    background-color: blueviolet;
+}
+
+#firstScreen .message .bottom .isAll .isAll_wrap {
+    width: 80%;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+}
+
+#firstScreen .message .bottom .btns {
+    flex: 16;
+    background-color: burlywood;
+    display: flex;
+}
+
+#firstScreen .message .bottom .btns button {
+    flex: 1;
+    margin: 5px 10%;
+    background-image: linear-gradient(to left, rgb(255, 166, 2), rgb(255, 217, 0));
+    border-radius: 5px;
+    outline: none;
+}
+
+#firstScreen .message .bottom .pageNum {
+    flex: 24;
+    background-color: chocolate;
+    display: flex;
+}
+
+#firstScreen .message .bottom .pageNum div {
+    flex: 1;
+    color: white;
+    font-weight: bolder;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+#firstScreen .message .bottom .pageNum div:first-child i {
+    font-size: 30px;
+    padding: 5px;
+}
+
+#firstScreen .message .bottom .pageNum div:nth-child(2) input {
+    text-align: center;
+}
+
+#firstScreen .message .bottom .pageNum div:last-child i {
+    font-size: 20px;
+    padding: 5px;
+}
+
+#firstScreen .message .bottom .pageNum div i:active {
+    color: black;
+}
+
+#firstScreen .message .bottom .pageNum div:first-child {
+    text-align: right;
+}
+
+#firstScreen .message .bottom .pageNum .toggle_num {
+    text-align: center;
+}
+
+#firstScreen .message .bottom .pageNum .toggle_num input {
+    width: 30px;
+}
+
+@media screen and (max-width:1200px) {
+    #firstScreen .center {}
+    #firstScreen .left {}
+    #firstScreen .right {}
+    #firstScreen .message {}
+}
+
+@media screen and (max-width:992px) {
+    #firstScreen {
+        grid-template-rows: auto 800px 1fr;
+    }
+    #firstScreen .center {
+        width: 100%;
+        padding: 0;
+        position: absolute;
+        top: 400px;
+    }
+    #firstScreen .center .shade {
+        width: 100%;
+    }
+    #firstScreen .center .slideshow {
+        width: 100%;
+        left: 0;
+    }
+    #firstScreen .left {
+        width: 50%;
+        top: 0;
+        padding: 0;
+        border: 1px solid rgba(238, 130, 238, 0.1);
+    }
+    #firstScreen .right {
+        width: 50%;
+        top: 0;
+        padding: 0;
+        border: 1px solid rgba(238, 130, 238, 0.1);
+    }
+    #firstScreen .message {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    #firstScreen {
+        grid-template-rows: auto 1200px 1fr;
+    }
+    #firstScreen .center {
+        width: 100%;
+        padding: 0;
+        position: absolute;
+        top: 400px;
+    }
+    #firstScreen .center .shade {
+        width: 100%;
+    }
+    #firstScreen .center .circle li {
+        width: 17px;
+        height: 17px;
+    }
+    #firstScreen .center .slideshow {
+        width: 100%;
+        left: 0;
+    }
+    #firstScreen .left {
+        width: 100%;
+        top: 0;
+        padding: 0;
+    }
+    #firstScreen .right {
+        width: 100%;
+        top: 800px;
+        padding: 0;
+    }
+    #firstScreen .message {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width:532px) {
+    #firstScreen>.message {
+        display: none;
+    }
+}

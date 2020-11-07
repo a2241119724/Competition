@@ -1,0 +1,194 @@
+/* --------------------section2-------------------- */
+
+#page2 {
+    width: 80%;
+    min-height: 550px;
+    margin: 0 auto;
+    padding: 0 0 100px;
+    background-color: rgba(100, 100, 100, 0.5);
+    color: white;
+}
+
+#page2 .beBig {
+    float: left;
+    width: 30%;
+}
+
+#page2 .waterfall {
+    margin: 20px 0 0 0;
+    width: 70%;
+    height: 500px;
+    float: left;
+}
+
+
+/* 隐藏滚动条 */
+
+
+/*IE10,IE11,IE12滚动条*/
+
+#page2 .waterfall {
+    -ms-scroll-chaining: chained;
+    -ms-overflow-style: none;
+    -ms-content-zooming: zoom;
+    -ms-scroll-rails: none;
+    -ms-content-zoom-limit-min: 100%;
+    -ms-content-ezoom-limit-max: 500%;
+    /* -ms-scroll-snap-type: proximity; */
+    -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
+    -ms-overflow-style: none;
+    /* overflow: auto; */
+    /* firefox滚动条 */
+    overflow: -moz-scrollbars-none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-color: transparent transparent;
+    scrollbar-track-color: transparent;
+    -ms-scrollbar-track-color: transparent;
+}
+
+
+/* chrome,opera滚动条 */
+
+#page2 .waterfall::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+#page2 .waterfall::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0);
+}
+
+#page2 .waterfall:hover::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#page2 .waterfall::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0);
+}
+
+#page2 .waterfall:hover::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#page2 .waterfall::-o-scrollbar {
+    -moz-appearance: none !important;
+    background: rgba(0, 255, 0, 0) !important;
+}
+
+#page2 .waterfall ul {
+    position: relative;
+    margin: 0 auto;
+}
+
+#page2 article:hover .waterfall ul {
+    /* margin-left: 41px; */
+}
+
+#page2 .waterfall li {
+    width: 130px;
+    height: auto;
+    padding: 15px 0 0 15px;
+    float: left;
+    position: relative;
+}
+
+
+/* #page2 .waterfall li:hover {
+    transition: all 0.4s;
+    transform: translateY(3px) scale(1.05);
+} */
+
+#page2 .beBig {
+    height: 500px;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+#page2 .waterfall .wrap,
+#page2 .beBig .warp {
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 0;
+}
+
+#page2 .waterfall li img,
+#page2 .beBig .wrap img {
+    width: 100%;
+    /* 图片自适应 */
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+#page2 .beBig .wrap img {
+    height: 350px;
+}
+
+#page2 .waterfall li .message,
+#page2 .beBig .wrap .message {
+    width: 100%;
+    height: 50px;
+    border-radius: 0 0 10px 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+#page2 .beBig .wrap .message {
+    height: 100px;
+}
+
+#page2 .waterfall li h4,
+#page2 .beBig .wrap h4 {
+    flex: 1;
+    height: 40px;
+    text-align: center;
+    border-right: 1px dotted black;
+    line-height: 40px;
+}
+
+#page2 .beBig .wrap h4 {
+    height: 100px;
+    line-height: 100px;
+}
+
+#page2 .waterfall li p,
+#page2 .beBig .wrap p {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+}
+
+#page2 .beBig h4 {
+    font-size: 30px;
+    text-align: center;
+}
+
+@media screen and (max-width:992px) {
+    #page2 .waterfall {
+        width: 100%;
+    }
+    #page2 .beBig {
+        width: 40%;
+        margin: 0 auto;
+        float: unset;
+    }
+}
+
+@media screen and (max-width:768px) {
+    #page2 .beBig {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:560px) {
+    #page2 .beBig {
+        width: 80%;
+    }
+}

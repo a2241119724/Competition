@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>参赛作品</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="shortcut icon" href="dongman.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./view/section2/section2.css">
+</head>
+
+<body>
+    <!-- 弹窗 -->
+    <article id="window">
+        <div class="login_window">
+            <div class="wrap">
+                <div class="logo"><img src="./assets/images/1.jpg" alt=""></div>
+                <form>
+                    <table>
+                        <tr>
+                            <td>账号</td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>密码</td>
+                            <td><input type="password" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button onclick="return false;" class="cancle">取消</button>
+                                <button onclick="return false;" class="login">确定</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="register_window">
+            <div class="wrap">
+                <form action="">
+                    <table>
+                        <tr>
+                            <th colspan="2">
+                                <h3>
+                                    注册账号
+                                </h3>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>账户:</td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>密码:</td>
+                            <td><input type="password" name=""></td>
+                        </tr>
+                        <tr>
+                            <td>再次确认:</td>
+                            <td><input type="password" name=""></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button onclick="return false;" class="cancle">取消</button>
+                                <button onclick="return false;" class="register">确定</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="updata_window">
+            <div class="wrap">
+                <form action="">
+                    <table border="1" cellspacing="1">
+                        <tr>
+                            <th colspan="5">
+                                <h3>修改数据</h3>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>序号</td>
+                            <td>作者</td>
+                            <td>价格</td>
+                            <td>文字</td>
+                        </tr>
+                        <tr>
+                            <td>修改前</td>
+                            <td><label for=""></label></td>
+                            <td><label for="author"></label></td>
+                            <td><label for="price"></label></td>
+                            <td><label for="text"></label></td>
+                        </tr>
+                        <tr>
+                            <td>修改后</td>
+                            <td></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <button onclick="return false;" class="cancle">取消</button>
+                                <button onclick="return false;" class="updata_determine">确定</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="add_window">
+            <div class="wrap">
+                <form action="">
+                    <table border="1" cellpadding="1">
+                        <tr>
+                            <th colspan="2">添加数据</th>
+                        </tr>
+                        <tr>
+                            <td>序号</td>
+                            <td><label for=""></label></td>
+                        </tr>
+                        <tr>
+                            <td>名字</td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>价格</td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>作者</td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button onclick="return false;" class="cancle">取消</button>
+                                <button onclick="return false;" class="add_determine">确定</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <canvas width="600" height="350" id="window_canvas"></canvas>
+    </article>
+    <!-- 全局背景:-200 -->
+    <!-- <div id="body_bg">
+        <img src="./assets/images/body_bg.jpg" alt="" srcset="">
+    </div> -->
+    <div id="body_bg">
+        <canvas id="bg_canvas"></canvas>
+    </div>
+    <header id="header">
+        <div class="shade"></div>
+        <div class="content">
+            <h2>全五分的</h2>
+            <p>前雾灯却无法测电吧水电费不定方程池第三层单纯的分为</p>
+            <p>违法成为风驰电掣威风威曾多次风是素</p>
+        </div>
+    </header>
+    <div id="firstScreen">
+        <section class="title">
+            <h3>我的信息</h3>
+            <div class="underline">
+                <div class="point"></div>
+            </div>
+        </section>
+        <article class="clearFloat">
+            <div class="center">
+                <!-- 遮罩:500 -->
+                <div class="shade"></div>
+                <!-- 图片:300 -->
+                <div class="images">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <img src="./assets/images/mid-autumn1.jpg" alt="0">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="./assets/images/mid-autumn2.jpg " alt="1">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="./assets/images/national-day1.jpg " alt="2">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="./assets/images/national-day2.jpg " alt="3">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 圆点:700 -->
+                <ul class="circle clearFloat">
+                    <li class="bgColor"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <!-- 轮播按钮:700 -->
+                <ul class="slideshow clearFloat">
+                    <li>
+                        <button class="iconfont">&#xe735;</button>
+                    </li>
+                    <li>
+                        <button class="iconfont">&#xe646;</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="left">
+                <div class="content">
+                    <div class="wrap">
+                        <div class="head">
+                            <img src="./assets/images/1.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <table>
+                                <tr>
+                                    <td>姓名</td>
+                                    <td>***</td>
+                                </tr>
+                                <tr>
+                                    <td>年龄</td>
+                                    <td>**</td>
+                                </tr>
+                                <tr>
+                                    <td>兴趣</td>
+                                    <td>******</td>
+                                </tr>
+                                <tr>
+                                    <td>爱好</td>
+                                    <td>*=*</td>
+                                </tr>
+                                <tr>
+                                    <td>身份</td>
+                                    <td>*@*</td>
+                                </tr>
+                                <tr>
+                                    <td>婚姻</td>
+                                    <td>*??*</td>
+                                </tr>
+                                <tr>
+                                    <td>省份</td>
+                                    <td>*_*</td>
+                                </tr>
+                                <tr>
+                                    <td>国家</td>
+                                    <td>* *</td>
+                                </tr>
+                                <tr>
+                                    <td>正常</td>
+                                    <td>_**_</td>
+                                </tr>
+                                <tr>
+                                    <td>关于</td>
+                                    <td>(**)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="content">
+                    <div class="wrap">
+                        <h3>欢迎来到</h3>
+                        <p>全为VG不会那就胡及出太阳bin 粗TV环境 VB局苦逼要和你节开幕不为VG不会那就胡及出太阳bin 粗TV环境 VB局苦逼幕不为VG不会那就胡及出太阳bin 粗TV环境 VBV环境 VB局苦逼幕不为VG不会那就胡环境 VB局苦逼要和你节开幕不同样板间不和你尽快白云记录不要抱你接口不会吧那几款不要不回家遇不难看不用吧</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <section class="message">
+            <div class="wrap">
+                <div class="top">
+                    <table height="30">
+                        <thead>
+                            <tr height="30">
+                                <th>
+                                    <lable>勾选</lable>
+                                </th>
+                                <th>
+                                    <lable>序号</lable>
+                                </th>
+                                <th>
+                                    <lable>名字</lable>
+                                </th>
+                                <th>
+                                    <lable>价格</lable>
+                                </th>
+                                <th>
+                                    <lable>作者</lable>
+                                </th>
+                                <th>
+                                    <lable>更新</lable>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="message_center">
+                    <ul>
+                        <li></li>
+                        <li>
+                            <input type="search" name="" id="" />
+                            <select name="" id="">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        </li>
+                        <li>
+                            <input type="search" name="" id="" />
+                            <select name="" id="">
+                        </select>
+                        </li>
+                        <li>
+                            <input type="search" name="" id="" />
+                            <label for="">~</label>
+                            <input type="search" name="" id="" />
+                            <select name="" id="">
+                            <option value="0~60">0~60</option>
+                            <option value="60~80">60~80</option>
+                            <option value="80~100">80~100</option>
+                            <option value="100~120">100~120</option>
+                            <option value="120~140">120~140</option>
+                        </select>
+                        </li>
+                        <li>
+                            <input type="search" name="" id="" />
+                            <select name="" id="">
+                        </select>
+                        </li>
+                        <li></li>
+                    </ul>
+                    <form action="">
+                        <table border="1">
+                        </table>
+                    </form>
+                </div>
+                <div class="bottom">
+                    <div class="isAll">
+                        <div class="isAll_wrap">
+                            <input type="checkbox" name="" id="all">
+                            <label for="all">全选</label>
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <button class="update">修改</button>
+                        <button class="add">添加</button>
+                    </div>
+                    <div class="pageNum">
+                        <div>
+                            <i class="iconfont">&#xe735;</i>
+                        </div>
+                        <div class="toggle_num">
+                            <input type="text"> /
+                            <table>10</table>
+                        </div>
+                        <div>
+                            <i class="iconfont">&#xe646;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <canvas id="linearCanvas"></canvas>
+        </section>
+    </div>
+    <!-- 导航:9999 -->
+    <nav id="nav">
+        <ul class="left clearFloat">
+            <li><a href="javascript:void(0)" data-href="#header">首页</a></li>
+            <li><a href="javascript:void(0)" data-href="#firstScreen">界面1</a></li>
+            <li><a href="javascript:void(0)" data-href="#page1">界面2</a></li>
+            <li><a href="javascript:void(0)" data-href="#page2">界面3</a></li>
+            <li><a href="javascript:void(0)" data-href="#page4">界面4</a></li>
+            <li><a href="javascript:void(0)" data-href="#footer">关于</a></li>
+            <li class="slide"></li>
+        </ul>
+        <div class="mobile">
+            <ul class="menu">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <ul class="mobile_nav">
+                <li><a href="javascript:void(0)" data-href="#header">首页</a></li>
+                <li><a href="javascript:void(0)" data-href="#firstScreen">界面1</a></li>
+                <li><a href="javascript:void(0)" data-href="#page1">界面2</a></li>
+                <li><a href="javascript:void(0)" data-href="#page2">界面3</a></li>
+                <li><a href="javascript:void(0)" data-href="#page4">界面4</a></li>
+                <li><a href="javascript:void(0)" data-href="#footer">关于</a></li>
+            </ul>
+        </div>
+        <div class="login_register">
+            <button class="login">登录</button>
+            <button class="register">注册</button>
+        </div>
+    </nav>
+    <section id="page1">
+        <section class="title">
+            <h3>我的信息</h3>
+            <div class="underline">
+                <div class="point"></div>
+            </div>
+        </section>
+        <div class="row">
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/1.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/12.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/11.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/10.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/9.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/2.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/3.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/4.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/5.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/6.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/7.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row_item">
+                <div class="border">
+                    <div class="warp"><img src="./assets/images/8.jpg" alt=""></div>
+                    <div class="content">
+                        <h4>你的名字</h4>
+                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="page2" class="clearFloat">
+        <section class="title">
+            <h3>我的信息</h3>
+            <div class="underline">
+                <div class="point"></div>
+            </div>
+        </section>
+        <article class="clearFloat">
+            <div class="beBig">
+                <h4>图片展示区</h4>
+                <div class="wrap">
+                    <img src="./assets/images/1.jpg" alt="快乐">
+                    <div class="message">
+                        <h4>图片1</h4>
+                        <p>我是谁我在那</p>
+                    </div>
+                </div>
+            </div>
+            <div class="waterfall">
+                <ul class="clearFloat">
+                    <li></li>
+                </ul>
+            </div>
+        </article>
+    </section>
+    <section id="page3">
+        <div class="main"></div>
+        <!-- 背景:8000 -->
+        <div class="page3_shade"></div>
+    </section>
+    <section id="page4">
+        <section class="title">
+            <h3>我的信息</h3>
+            <div class="underline">
+                <div class="point"></div>
+            </div>
+        </section>
+        <div class="grid">
+            <div class="menu1">
+                <ul>
+                    <li style="background: url(./assets/images/1.jpg) no-repeat center center/cover;">
+                        <div class="point"></div>
+                    </li>
+                    <li style="background: url(./assets/images/2.jpg) no-repeat center center/cover;">
+                        <div class="point"></div>
+                    </li>
+                    <li style="background: url(./assets/images/3.jpg) no-repeat center center/cover;">
+                        <div class="point"></div>
+                    </li>
+                    <li style="background: url(./assets/images/4.jpg) no-repeat center center/cover;">
+                        <div class="point"></div>
+                    </li>
+                    <li style="background: url(./assets/images/5.jpg) no-repeat center center/cover;">
+                        <div class="point"></div>
+                    </li>
+                    <li style="background: url(./assets/images/6.jpg) no-repeat center center/cover;">
+                        <div class="point"></div>
+                    </li>
+                    <li style="background: url(./assets/images/7.jpg) no-repeat center center/cover;">
+                        <div class="point"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="menu2"><canvas id="menu2"></canvas></div>
+            <div class="wrap">
+                <div class="item"><img src="./assets/images/50.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/6.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/71.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/9.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/13.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/20.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/27.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/32.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/40.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/47.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/55.jpg" alt=""></div>
+                <div class="item"><img src="./assets/images/60.jpg" alt=""></div>
+            </div>
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="myMessage">
+            <div class="Me">
+                <p>我的信息</p>
+                <p>名字：*** 年龄：**</p>
+                <p>学号：*********</p>
+                <p>QQ：**********</p>
+                <p>邮箱：**********@qq.com</p>
+            </div>
+            <div class="Chinese">
+                <p>语文</p>
+                <ul>
+                    <li>成绩：150</li>
+                    <li>成绩：150</li>
+                    <li>成绩：150</li>
+                    <li>成绩：150</li>
+                </ul>
+            </div>
+            <div class="Math">
+                <p>数学</p>
+                <ul>
+                    <li>成绩：150</li>
+                    <li>成绩：150</li>
+                    <li>成绩：150</li>
+                    <li>成绩：150</li>
+                </ul>
+            </div>
+            <div class="English">
+                <p>英语</p>
+                <ul>
+                    <li>成绩：150</li>
+                    <li>成绩：150</li>
+                    <li>成绩：150</li>
+                    <li>成绩：150</li>
+                </ul>
+            </div>
+        </div>
+
+    </footer>
+    <script src="./js/external/jquery.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

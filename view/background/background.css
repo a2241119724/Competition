@@ -1,0 +1,24 @@
+/* --------------------背景-------------------- */
+
+
+/* #body_bg {
+    width: 730px;
+    height: 1475px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -25%) rotateZ(90deg);
+    z-index: -200;
+}
+
+#body_bg img {
+    width: 730px;
+    height: 1475px;
+} */
+
+#body_bg {
+    background-color: #001a3c;
+    width: 100%;
+    height: 730px;
+    position: fixed;
+    z-index: -200;
+}

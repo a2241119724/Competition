@@ -1,0 +1,115 @@
+header {
+    width: 100%;
+    height: 730px;
+    margin: 0 auto;
+    font-size: 0;
+    background: url("../../assets/images/bg_header.jpg");
+    position: relative;
+}
+
+header .shade {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    z-index: 500;
+}
+
+header .content {
+    width: 60vw;
+    height: 60vh;
+    position: absolute;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes move1 {
+    from {
+        opacity: 0;
+        top: 100px;
+    }
+    to {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+header .content h2 {
+    flex: 1;
+    font-size: 50px;
+    opacity: 0;
+    text-align: center;
+    animation: move1 1s forwards;
+    position: relative;
+    color: black;
+}
+
+header .content p {
+    flex: 1;
+    font-size: 40px;
+    opacity: 0;
+    text-align: center;
+    position: relative;
+    color: black;
+}
+
+@keyframes move2 {
+    from {
+        opacity: 0;
+        top: 100px;
+    }
+    to {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+header .content p:first-of-type {
+    animation: move2 1s 1s forwards;
+}
+
+@keyframes move3 {
+    from {
+        opacity: 0;
+        top: 100px;
+    }
+    to {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+header .content p:last-child {
+    animation: move3 1s 2s forwards;
+}
+
+@media screen and (max-width:1200px) {
+    header .content h2 {
+        font-size: 45px;
+    }
+    header .content p {
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width:992px) {
+    header .content h2 {
+        font-size: 40px;
+    }
+    header .content p {
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    header .content h2 {
+        font-size: 30px;
+    }
+    header .content p {
+        font-size: 25px;
+    }
+}

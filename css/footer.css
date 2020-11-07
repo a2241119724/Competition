@@ -1,0 +1,99 @@
+/* --------------------footer-------------------- */
+
+footer {
+    width: calc(100% - 100px);
+    height: auto;
+    padding: 50px;
+    background: #181818;
+}
+
+footer .myMessage {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 3fr repeat(3, 2fr);
+    align-items: stretch;
+    color: white;
+    display: -ms-grid;
+    -ms-grid-rows: 1fr;
+    -ms-grid-columns: 3fr 2fr 2fr 2fr;
+    -ms-grid-row-align: stretch;
+}
+
+footer .myMessage .Me {
+    -ms-grid-column: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+footer .myMessage .Me p {
+    padding: 10px;
+}
+
+footer .myMessage .Chinese {
+    -ms-grid-column: 2;
+}
+
+footer .myMessage .Math {
+    -ms-grid-column: 3;
+}
+
+footer .myMessage .English {
+    -ms-grid-column: 4;
+}
+
+footer .myMessage div p:nth-child(1) {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px 40px;
+}
+
+footer .myMessage p {
+    text-align: center;
+    font-size: 14px;
+}
+
+footer .myMessage .Me p:nth-child(1) {
+    flex: 2;
+}
+
+footer .myMessage .Me p:nth-child(n+2) {
+    flex: 1;
+}
+
+footer .myMessage div:nth-child(n+2) {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    justify-items: center;
+    display: -ms-grid;
+    -ms-grid-rows: 1fr 2fr;
+    -ms-grid-column-align: center;
+}
+
+footer .myMessage div:nth-child(n+2) p {
+    -ms-grid-row: 1;
+}
+
+footer .myMessage div:nth-child(n+2) ul {
+    -ms-grid-row: 2;
+}
+
+footer .myMessage div ul {
+    /* flex: ; */
+    height: 150px;
+}
+
+footer .myMessage div ul li {
+    padding: 10px;
+}
+
+@media screen and (max-width:992px) {
+    footer .myMessage {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width:768px) {
+    footer .myMessage {
+        grid-template-columns: 1fr;
+    }
+}

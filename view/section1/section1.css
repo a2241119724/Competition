@@ -1,0 +1,88 @@
+/* --------------------section1-------------------- */
+
+#page1 * {
+    /* 栅格布局 */
+    box-sizing: border-box;
+}
+
+#page1 {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    /* background-color: rgba(100, 100, 100, 0.5); */
+    /* 栅格布局 */
+    padding: 0 15px;
+    overflow: hidden;
+}
+
+#page1 .row {
+    height: 100%;
+    /* 栅格布局 */
+    width: auto;
+    margin: 0 -15px;
+}
+
+#page1 .row .row_item {
+    height: 450px;
+    margin: 10px 0;
+    /* 栅格布局 */
+    width: 25%;
+    padding: 0 15px;
+    position: relative;
+    float: left;
+}
+
+#page1 .row .row_item .border {
+    border-radius: 10px;
+    position: relative;
+}
+
+#page1 .row .row_item .warp {
+    width: 100%;
+    height: 300px;
+}
+
+#page1 .row .row_item .warp img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+#page1 .row .row_item .content {
+    width: 100%;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 0 0 10px 10px;
+    color: white;
+}
+
+#page1 .row .row_item .content h4 {
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    text-align: center;
+}
+
+#page1 .row .row_item .content p {
+    height: 120px;
+    overflow: hidden;
+}
+
+@media screen and (max-width:1200px) {
+    #page1 .row .row_item {
+        width: 33.33%;
+    }
+}
+
+@media screen and (max-width:992px) {
+    #page1 .row .row_item {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    #page1 .row .row_item {
+        width: 100%;
+    }
+}

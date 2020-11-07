@@ -1,0 +1,254 @@
+/* --------------------nav-------------------- */
+
+@keyframes animate_nav {
+    from {
+        background-color: rgba(255, 255, 255, 0);
+        box-shadow: none;
+    }
+    to {
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 5px black;
+    }
+}
+
+@keyframes animate_nav_a {
+    from {
+        color: white;
+    }
+    to {
+        color: black;
+    }
+}
+
+
+/* 停留在末尾 */
+
+nav.animate_bottom {
+    animation: animate_nav 0.75s forwards;
+}
+
+nav.animate_bottom ul.left a {
+    animation: animate_nav_a 0.75s forwards;
+}
+
+nav.animate_bottom .login_register button {
+    animation: animate_nav_a 0.75s forwards;
+}
+
+@keyframes animate_nav1 {
+    from {
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 5px black;
+    }
+    to {
+        background-color: rgba(255, 255, 255, 0);
+        box-shadow: none;
+    }
+}
+
+@keyframes animate_nav_a1 {
+    from {
+        color: black;
+    }
+    to {
+        color: white;
+    }
+}
+
+
+/* 停留在末尾 */
+
+nav.animate_top {
+    animation: animate_nav1 0.75s forwards;
+}
+
+nav.animate_top ul.left a {
+    animation: animate_nav_a1 0.75s forwards;
+}
+
+nav.animate_top .login_register button {
+    animation: animate_nav_a1 0.75s forwards;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    /* 运算符两边应有空格 */
+    width: calc(100% - 100px);
+    height: 50px;
+    padding: 0 50px;
+    display: flex;
+}
+
+nav .left {
+    flex: 5;
+    height: 100%;
+    position: relative;
+}
+
+nav .left li {
+    float: left;
+    width: 130px;
+    font-size: 20px;
+    height: 100%;
+    line-height: 50px;
+    text-align: center;
+}
+
+nav .left a {
+    padding: 3px 18px;
+    border-radius: 18px;
+}
+
+nav .left a:hover {
+    border: 4px solid rgba(192, 192, 192, 0.3);
+}
+
+nav .left a:active {
+    border: 2px solid rgba(192, 192, 192, 1);
+}
+
+nav .left li.slide {
+    height: 8px;
+    position: absolute;
+    bottom: 0;
+    background-color: aqua;
+    border-radius: 5px;
+}
+
+nav .mobile {
+    display: none;
+}
+
+nav .mobile ul:nth-child(2) {
+    height: 0;
+    overflow: hidden;
+}
+
+nav .login_register {
+    flex: 1;
+    height: 100%;
+}
+
+nav .login_register button {
+    width: 43%;
+    height: 34px;
+    margin: 8px 0;
+    border-radius: 17px;
+    background-color: transparent;
+    border: 4px solid rgba(192, 192, 192, 0.3);
+    color: white;
+    font-size: 16px;
+}
+
+nav .login_register button:active {
+    border-color: #161616;
+}
+
+@media screen and (max-width:1200px) {
+    nav .left {
+        flex: 10;
+    }
+    nav .left li {
+        width: 104px;
+    }
+    nav .login_register {
+        flex: 3;
+    }
+    nav .login_register button {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:992px) {
+    nav {
+        padding: 0 25px;
+        width: calc(100% - 50px);
+    }
+    nav .left {
+        flex: 3;
+    }
+    nav .left li {
+        width: 80px;
+    }
+    nav .left a {
+        padding: 3px 5px;
+        font-size: 18px;
+    }
+    nav .login_register {
+        flex: 1;
+    }
+    nav .login_register button {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    nav .left {
+        display: none;
+    }
+    nav .mobile {
+        display: block;
+        flex: 1;
+        width: 100%;
+        position: relative;
+    }
+    nav .mobile ul.menu {
+        width: 30px;
+        height: 24px;
+        margin: 0 15px;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    nav .mobile .menu li {
+        width: 30px;
+        height: 4px;
+        position: absolute;
+        background-color: black;
+    }
+    nav .mobile .menu li:nth-child(1) {
+        top: 0;
+    }
+    nav .mobile .menu li:nth-child(2) {
+        top: 10px;
+    }
+    nav .mobile .menu li:nth-child(3) {
+        top: 20px;
+    }
+    nav .mobile ul.open {
+        transition: 2s height;
+        width: 110%;
+        height: 300px;
+        padding: 0 40px;
+        position: absolute;
+        left: -25px;
+        top: 50px;
+        background-color: rgb(42, 42, 42, .69);
+    }
+    nav .mobile ul.open li {
+        width: 100%;
+        padding: 10px 0;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 5px;
+    }
+    nav .mobile ul.open li:hover {
+        background-color: pink;
+    }
+    nav .mobile ul.open li:hover a {
+        color: black;
+    }
+    nav .mobile ul.open a {
+        color: white;
+    }
+    nav .login_register {
+        flex: 1;
+    }
+    nav .login_register button {
+        width: 40%;
+        margin: 8px 4%;
+    }
+}
