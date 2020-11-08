@@ -74,6 +74,13 @@
 }
 
 @media screen and (max-width:768px) {
+    #page4 .grid {
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
+    }
+    #page4 .grid .menu1 {
+        grid-column: 1 / 2;
+    }
     #page4 .grid .wrap {
         transform: rotate3d(0, -0.1, 1, 90deg);
     }

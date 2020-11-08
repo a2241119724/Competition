@@ -62,6 +62,8 @@
 }
 
 #firstScreen .center .circle {
+    width: 120px;
+    height: auto;
     position: absolute;
     top: 350px;
     left: 50%;
@@ -528,6 +530,9 @@
     #firstScreen .center .shade {
         width: 100%;
     }
+    #firstScreen .center .circle {
+        width: 108px;
+    }
     #firstScreen .center .circle li {
         width: 17px;
         height: 17px;
@@ -540,6 +545,9 @@
         width: 100%;
         top: 0;
         padding: 0;
+    }
+    #firstScreen .left .content .wrap .message {
+        flex: 3;
     }
     #firstScreen .right {
         width: 100%;
