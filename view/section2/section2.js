@@ -25,12 +25,23 @@ $(function() {
         waterFall();
     }
 
+    // setTimeout(function() {
+    //     // $waterfall.scrollTop(200);
+    //     // $waterfall.trigger("scroll");
+    //     // $waterfall.trigger("scroll");
+    // }, 250);
+
     // 解决初始化图片排列不正确的bug(重叠)
-    setTimeout(function() {
-        $waterfall.scrollTop(200);
-        // $waterfall.trigger("scroll");
-        // $waterfall.trigger("scroll");
-    }, 250)
+
+    let timer = setInterval(function() {
+        $waterfall.trigger("scroll");
+        if ($ul_img.find("li:not([is-loding]) img").length === 0) {
+            $waterfall.scrollTop(200);
+            // $waterfall.trigger("scroll");
+            // $waterfall.trigger("scroll");
+            clearInterval(timer);
+        }
+    }, 300);
 
     function refresh() {
         arr_height = [];
@@ -102,7 +113,7 @@ $(function() {
                 '</div>' +
                 '</li>').insertBefore($li_last);
             // 等img加载出来在渲染位置
-            if ($ul_img.find("li:not(.is-loding) img").height() !== 0) {
+            if ($ul_img.find("li:not([is-loding]) img").height() !== 0) {
                 clearInterval(timer);
                 refresh();
             } else {
