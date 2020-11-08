@@ -35,13 +35,14 @@ $(function() {
 
     let timer = setInterval(function() {
         $waterfall.trigger("scroll");
+        console.log($ul_img.find("li:not([is-loding]) img").length);
         if ($ul_img.find("li:not([is-loding]) img").length === 0) {
             $waterfall.scrollTop(200);
             // $waterfall.trigger("scroll");
             // $waterfall.trigger("scroll");
             clearInterval(timer);
         }
-    }, 300);
+    }, 1000);
 
     function refresh() {
         arr_height = [];
