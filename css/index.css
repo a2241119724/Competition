@@ -5,9 +5,7 @@
 @import "../view/header/header.css";
 @import "../view/nav/nav.css";
 @import "../view/section1/section1.css";
-
-/* @import "../view/section2/section2.css"; */
-
+@import "../view/section2/section2.css";
 @import "../view/section3/section3.css";
 @import "../view/section4/section4.css";
 @import "./footer.css";
