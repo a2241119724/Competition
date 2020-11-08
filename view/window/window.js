@@ -1,9 +1,9 @@
 $(function() {
     let $new_window = $("#window");
-    let $cancle_determine = $("#window .wrap form table tr:last-child button");
-    let $label = $("#window .updata_window .wrap form table tr:nth-child(3) label");
-    let $update_input = $("#window .updata_window .wrap form table tr:nth-child(4) input");
-    let $add_input = $("#window .add_window .wrap form table tr:nth-child(n+3) input");
+    let $cancle_determine = $new_window.find(".wrap tr:last-child button");
+    let $label = $new_window.find(".updata_window .wrap tr:nth-child(3) label");
+    let $update_input = $new_window.find(".updata_window .wrap tr:nth-child(4) input");
+    let $add_input = $new_window.find(".add_window .wrap tr:nth-child(n+3) input");
 
     // 取消按钮
     $cancle_determine.filter(".cancle").click(function() {
@@ -26,9 +26,10 @@ $(function() {
     // 添加确定按钮
     $cancle_determine.filter(".add_determine").click(function() {
         let add_arr = { "isSelect": false, "order": data.length, "name": "", "price": 0, "author": "" };
-        add_arr.name = $add_input.val();
-        add_arr.price = Number($add_input.val());
-        add_arr.author = $add_input.val();
+        let v = $add_input.val(); //优化
+        add_arr.name = v;
+        add_arr.price = Number(v);
+        add_arr.author = v;
         new_data.push(add_arr);
         $new_window.css("display", "none");
         draw_table();

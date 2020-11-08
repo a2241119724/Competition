@@ -2,10 +2,12 @@ $(function() {
     //开始====================轮播图====================//
     let $ul = $("#firstScreen .images ul");
     let $li = $ul.find("li");
-    let $btnL = $("#firstScreen .slideshow button:first");
-    let $btnR = $("#firstScreen .slideshow button:last");
+    let $btns = $("#firstScreen .slideshow button");
+    let $btnL = $btns.first();
+    let $btnR = $btns.last();
     let $li_circle = $("#firstScreen .circle li");
 
+    let len = $li.length; //优化
     let distance = 0; //动画每次轮播的距离
     let index = 0; //动画轮播的图片索引
     let timer = null; //定时器
@@ -23,7 +25,7 @@ $(function() {
     function init() {
         $li.css("width", $("#firstScreen .center").width());
         distance = $li.width();
-        $ul.css("left", -$li.width());
+        $ul.css("left", -distance);
         if (isOne[0]) { //克隆添加
             let a = $li.first().clone();
             let b = $li.last().clone();
@@ -55,9 +57,9 @@ $(function() {
         index--;
         //2.判断是否是边界
         if (index === -1) {
-            index = $li.length - 1;
+            index = len - 1;
             setTimeout(function() {
-                $ul.finish().css("left", -($li.length) * distance + "px");
+                $ul.finish().css("left", -len * distance + "px");
             }, timeB);
         }
         $ul.finish().animate({ "left": $ul.position().left + distance + "px" }, timeB, function() {
@@ -77,7 +79,7 @@ $(function() {
         //1.图片索引递增
         index++;
         //2.判断是否是边界
-        if (index === $li.length) {
+        if (index === len) {
             index = 0;
             setTimeout(function() {
                 $ul.finish().css("left", -distance + "px");
@@ -123,8 +125,9 @@ $(function() {
     let ctx = linearCanvas.getContext("2d");
 
     function init_1() {
-        linearCanvas.width = $(linearCanvas).parent().width();
-        linearCanvas.height = $(linearCanvas).parent().height();
+        let lc = $(linearCanvas).parent()
+        linearCanvas.width = lc.width();
+        linearCanvas.height = lc.height();
     }
     init_1();
     $window.resize(function() {
@@ -137,7 +140,7 @@ $(function() {
         this.blue = blue;
 
         this.redspeed = 1;
-        this.greenspeed = 1;
+        // this.greenspeed = 1;
         this.bluespeed = 1;
         this.draw = function() {
             let linearGradient = ctx.createLinearGradient(0, 0, linearCanvas.width, linearCanvas.height);
@@ -179,20 +182,22 @@ $(function() {
     }
 
     // ==============================================
-    let $thead = $("#firstScreen .message .top table th");
-    let $table = $("#firstScreen .message .message_center table");
-    let $center_li = $("#firstScreen .message .message_center li");
-    let $li_option = $("#firstScreen .message .message_center ul");
-    let $isAll = $("#firstScreen .message .wrap .bottom .isAll_wrap input");
-    let $search = $li_option.find("input");
-    let $update_add = $("#firstScreen .message .bottom .btns button");
-    let $form = $("#firstScreen .message .message_center form");
-    let $pagenum = $("#firstScreen .message .bottom .pageNum div");
-    let $pagenum_input = $("#firstScreen .message .bottom .pageNum .toggle_num input");
+    let $m = $("#firstScreen .message"); //优化
+    let $thead = $m.find(".top table th");
+    let $mc = $m.find(".message_center"); //优化
+    let $table = $mc.find("table");
+    let $ul_option = $mc.find("ul");
+    let $center_li = $ul_option.find("li");
+    let $search = $ul_option.find("input");
+    let $form = $mc.find("form");
+    let $b = $m.find(".wrap .bottom"); //优化
+    let $isAll = $b.find(".isAll_wrap input");
+    let $update_add = $b.find(".btns button");
+    let $pagenum = $b.find(".pageNum div");
+    let $pagenum_input = $b.find(".pageNum .toggle_num input");
     let $new_window = $("#window");
-    let $updata_label = $("#window .updata_window .wrap form table tr:nth-child(3) label");
-    let $add_label = $("#window .add_window .wrap form table tr:nth-child(2) label");
-
+    let $updata_label = $("#window").find(".updata_window .wrap form table tr:nth-child(3) label");
+    let $add_label = $("#window").find(".add_window .wrap form table tr:nth-child(2) label");
 
     // let count_of_count = 50; //每页数据
     let pagenum = 1; //页数
@@ -211,26 +216,29 @@ $(function() {
     draw_table = function() {
         order = 0;
         $table.html(null);
-        for (let i = 0; i < new_data.length; i++) {
+        let len_1 = new_data.length; //优化
+        for (let i = 0; i < len_1; i++) {
             order++;
+            let nd = new_data[i]; //优化
             let tr_td = $("<tr>");
-            tr_td.html('<td><input type="checkbox" ' + (new_data[i].isSelect ? "checked" : "") + '></td>' +
-                '<td>' + new_data[i].order + '</td>' +
-                '<td>' + new_data[i].name + '</td>' +
-                '<td>' + new_data[i].price + '元</td>' +
-                '<td>' + new_data[i].author + '</td>' +
+            tr_td.html('<td><input type="checkbox" ' + (nd.isSelect ? "checked" : "") + '></td>' +
+                '<td>' + nd.order + '</td>' +
+                '<td>' + nd.name + '</td>' +
+                '<td>' + nd.price + '元</td>' +
+                '<td>' + nd.author + '</td>' +
                 '<td><button class="delete" onclick="return false;">删除</button>' +
                 '</td>');
             $table.append(tr_td);
         }
         let count = 0;
+        let it = $table.find("tr input"); //优化
         // 解决一开始全选不对应问题
-        $table.find("tr input").each(function() {
+        it.each(function() {
             if ($(this).attr("checked") === "checked") {
                 count++;
             }
         })
-        if (count === $table.find("tr td input").length) {
+        if (count === it.length) {
             $isAll.attr("checked", "checked");
         }
         thead_ul();
@@ -246,43 +254,46 @@ $(function() {
     })
 
     $search.click(function(event) {
-        let e = event || window.e;
+        let e = event || window.event;
         e.stopPropagation(); //阻止冒泡(也可以阻止捕捉)
         // e.stopImmediatePropagation(); //阻止捕捉(也可以阻止冒泡)
     });
 
-    $li_option.click(function(event) {
-        let e = event || window.e;
+    $ul_option.click(function(event) {
+        let e = event || window.event;
+        let pv = $(e.target).prev(); //优化
         if (e.target.tagName.toLowerCase() === "li") {
             //错误
-        } else if ($(e.target).prev().prev().length == 1) {
+        } else if (pv.prev().length == 1) {
             let min_max = $(e.target).val().match(/\w+(\.\w+)?/g);
-            $(e.target).prev().prev().prev().val(min_max[0]);
-            $(e.target).prev().val(min_max[1]);
-            $(e.target).prev().prev().prev().trigger("change");
-            $(e.target).prev().trigger("change");
+            pv.prev().prev().val(min_max[0]);
+            pv.val(min_max[1]);
+            pv.prev().prev().trigger("change");
+            pv.trigger("change");
         } else if (e.target.tagName.toLowerCase() === "select") {
-            $(e.target).prev().val($(e.target).val());
-            $(e.target).prev().trigger("change");
+            pv.val($(e.target).val());
+            pv.trigger("change");
         }
     })
 
     $isAll.click(function() {
-        new_data.forEach((item) => {
-            item.isSelect = $(this).prop("checked");
+        let _this = $(this);
+        new_data.forEach(function(item) {
+            item.isSelect = _this.prop("checked");
         })
         draw_table();
     })
 
     $search.first().change(function() {
         new_data = [];
-        if (isNaN(Number($(this).val()))) {
+        let vl = $(this).val(); //优化
+        if (isNaN(Number(vl))) {
             alert("你输入的有错误");
-        } else if ($(this).val() == "") {
+        } else if (vl == "") {
             new_data = data;
         } else {
-            data.forEach((item) => {
-                if (item.order == $(this).val()) {
+            data.forEach(function(item) {
+                if (item.order == vl) {
                     new_data.push(item);
                 }
             })
@@ -293,11 +304,12 @@ $(function() {
     })
     $search.eq(1).change(function() {
         new_data = [];
-        if ($(this).val() == "") {
+        let vl = $(this).val(); //优化
+        if (vl == "") {
             new_data = data;
         } else {
-            data.forEach((item) => {
-                if (item.name == $(this).val()) {
+            data.forEach(function(item) {
+                if (item.name == vl) {
                     new_data.push(item);
                 }
             })
@@ -308,12 +320,13 @@ $(function() {
     });
     $search.eq(2).change(function() {
         new_data = [];
-        if ($(this).val() == "") {
+        let vl = $(this).val(); //优化
+        if (vl == "") {
             new_data = data;
         } else {
             let max = Number($search.eq(3).val()) || Infinity;
             data.forEach((item) => {
-                if (item.price >= Number($(this).val()) && item.price < max) {
+                if (item.price >= Number(vl) && item.price < max) {
                     new_data.push(item);
                 }
             })
@@ -324,12 +337,13 @@ $(function() {
     });
     $search.eq(3).change(function() {
         new_data = [];
-        if ($(this).val() == "") {
+        let vl = $(this).val(); //优化
+        if (vl == "") {
             new_data = data;
         } else {
             let min = Number($search.eq(2).val()) || -Infinity;
-            data.forEach((item) => {
-                if (item.price <= Number($(this).val()) && item.price > min) {
+            data.forEach(function(item) {
+                if (item.price <= Number(vl) && item.price > min) {
                     new_data.push(item);
                 }
             })
@@ -340,11 +354,12 @@ $(function() {
     });
     $search.last().change(function() {
         new_data = [];
-        if ($(this).val() == "") {
+        let vl = $(this).val(); //优化
+        if (vl == "") {
             new_data = data;
         } else {
             data.forEach((item) => {
-                if (item.author == $(this).val()) {
+                if (item.author == vl) {
                     new_data.push(item);
                 }
             })
@@ -356,25 +371,28 @@ $(function() {
 
     // 
     $table.click(function(event) {
-        let e = event || window.e;
+        let e = event || window.event;
+        let pn = e.target.parentNode.parentNode;
         if (e.target.className === "delete") {
-            // 删除页面数据
-            e.target.parentNode.parentNode.remove();
-            let delete_order = Number($(e.target.parentNode.parentNode).find("td").eq(1).text());
-            // 删除源数据
-            // data.splice(delete_order, 1); //有问题
-            data = data.filter(function(item) {
-                return item.order !== delete_order
-            });
-            new_data = new_data.filter(function(item) {
-                return item.order !== delete_order
-            });
-            draw_table();
-            thead_ul();
-            isSelectedAll();
+            if (confirm("真的要删除吗")) {
+                // 删除页面数据
+                pn.remove();
+                let delete_order = Number($(pn).find("td").eq(1).text());
+                // 删除源数据
+                // data.splice(delete_order, 1); //有问题
+                data = data.filter(function(item) {
+                    return item.order !== delete_order
+                });
+                new_data = new_data.filter(function(item) {
+                    return item.order !== delete_order
+                });
+                draw_table();
+                thead_ul();
+                isSelectedAll();
+            }
         }
         // 
-        if (e.target.tagName.toLowerCase() === "input") {
+        if (e.target.tagName === "INPUT") {
             let newdata = new_data.filter(function(item) {
                 return item.order === Number($(e.target).parent().next().text());
             })[0];
@@ -417,7 +435,7 @@ $(function() {
         $add_label.text(data.length);
     })
 
-    // 初始页数
+    // 初始化页数
     $pagenum.eq(1).find("input").val(pagenum);
     $pagenum.eq(0).find("i").click(function() {
         if (pagenum > 1) {
@@ -433,12 +451,13 @@ $(function() {
     });
 
     $pagenum_input.blur(function() {
-        if (Number($(this).val()) > 10) {
+        let v = Number($(this).val());
+        if (v > 10) {
             pagenum = 10;
-        } else if (Number($(this).val()) < 1) {
+        } else if (v < 1) {
             pagenum = 1;
         } else {
-            pagenum = Number($(this).val());
+            pagenum = v;
         }
         $pagenum.eq(1).find("input").val(pagenum);
     })

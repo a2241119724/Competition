@@ -108,12 +108,11 @@ $(function() {
             } else {
                 // 如果图片未加载成功开启定时器,知道img加载完成为止
                 timer = setInterval(() => {
-                    console.log("图片加载中");
                     if ($ul_img.find("li:not([is-loding]) img").height() !== 0) {
                         clearInterval(timer);
                     }
                     refresh();
-                }, 100)
+                }, 1000)
             }
         }
     }
@@ -121,16 +120,18 @@ $(function() {
 
     // 判断section2宽度
     function colChange() {
-        if ($waterfall.width() < $li_last.innerWidth() * 2) {
-            ul_width = $li_last.innerWidth();
-        } else if ($waterfall.width() < $li_last.innerWidth() * 3) {
-            ul_width = $li_last.innerWidth() * 2;
-        } else if ($waterfall.width() < $li_last.innerWidth() * 4) {
-            ul_width = $li_last.innerWidth() * 3;
-        } else if ($waterfall.width() < $li_last.innerWidth() * 5) {
-            ul_width = $li_last.innerWidth() * 4;
+        let w = $waterfall.width();
+        let iw = $li_last.innerWidth();
+        if (w < iw * 2) {
+            ul_width = iw;
+        } else if (w < iw * 3) {
+            ul_width = iw * 2;
+        } else if (w < iw * 4) {
+            ul_width = iw * 3;
+        } else if (w < iw * 5) {
+            ul_width = iw * 4;
         } else {
-            ul_width = $li_last.innerWidth() * 5;
+            ul_width = iw * 5;
         }
         $waterfall.trigger("scroll");
     }
@@ -140,18 +141,17 @@ $(function() {
 
     // 事件委托
     $ul_img.click(function(event) {
-        let e = event || window.e;
+        let e = event || window.event;
         // 点击canvas
-        if (e.target.tagName.toLowerCase() === "canvas" && $(e.target).attr("is-loding") != 1) {
+        if (e.target.tagName === "CANVAS" && $(e.target).attr("is-loding") != 1) {
             let date = new Date();
             let li = $(e.target).parent().parent();
-            let newDate = date.getFullYear() + "月" + date.getMonth() + "月" + date.getDay() + "日 " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + ":" + date.getMilliseconds();
             $beBig.find("img").attr("src", li.find("img").attr("src"));
             $beBig.find(".message h4").text(li.find(".message h4").text());
-            $beBig.find(".message p").html(newDate + "<br/>" + li.find(".message p").text());
+            $beBig.find(".message p").html(date.getFullYear() + "月" + date.getMonth() + "月" + date.getDay() + "日 " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + ":" + date.getMilliseconds() + "<br/>" + li.find(".message p").text());
         }
     }).mouseover(function(event) {
-        let e = event || window.e;
+        let e = event || window.event;
         let translateY = 0;
         let scale = 1;
         let li = $(e.target).parent().parent();
@@ -173,7 +173,7 @@ $(function() {
             }
         }, 10)
     }).mouseout(function(event) {
-        let e = event || window.e;
+        let e = event || window.event;
         let translateY = 0;
         let scale = 1;
         let li = $(e.target).parent().parent();
@@ -195,4 +195,16 @@ $(function() {
             }
         }, 10)
     });
+
+    // start(); // 一开始没有滚动的时候，出现在视窗中的图片也会加载
+
+    // function start() {
+    //     $("#page2 .waterfall li:not(:last-child) img").not('[data-isLoading]').each(function() {
+    //         if (minHeight - 200 < ($waterfall.scrollTop() + $waterfall.height())) {
+    //             $(this).attr('src', $(this).attr('data-src'));
+    //             // 已经加载的图片，给它设置一个属性，值为1，作为标识
+    //             $(this).attr('data-isLoading', 1);
+    //         }
+    //     })
+    // }
 })

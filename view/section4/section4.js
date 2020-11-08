@@ -18,12 +18,13 @@ $(function() {
     // menu1初始化
     (function() {
         $li.each(function(index) {
+            let o = (index - 3) * offset_X;
             $(this).css({
-                "left": (index - 3) * offset_X + "px"
+                "left": o + "px"
             });
             $(this).css({
-                "transform": "translateZ(" + -Math.abs((index - 3) * offset_X) + "px)",
-                "opacity": 1 - Math.abs((index - 3) * offset_X) / 400
+                "transform": "translateZ(" + -Math.abs(o) + "px)",
+                "opacity": 1 - Math.abs(o) / 400
             });
         })
     })()
@@ -53,7 +54,7 @@ $(function() {
         init();
     });
 
-    setInterval(() => {
+    setInterval(function() {
         if (rotates_X === 360) {
             rotates_X = 0;
         }
@@ -71,6 +72,7 @@ $(function() {
 
     $menu1.mousedown(function(ev) {
         let e = ev || window.event;
+        let _this = $(this);
         let beforeX = e.clientX;
         let beforeLeft = parseFloat($(e.target).css("left"));
 
@@ -84,17 +86,19 @@ $(function() {
             });
         });
 
-        $(this).mousemove(function(ev) {
-            let e = ev || window.event;
+        _this.mousemove(function(event) {
+            let e = event || window.event;
             let afterX = e.clientX;
+            let f = parseFloat($li.first().css("left"));
+            let l = parseFloat($li.last().css("left"));
             // 控制左右不超出范围
-            if (parseFloat($li.first().css("left")) <= 0 && parseFloat($li.last().css("left")) >= 0) {
+            if (f <= 0 && l >= 0) {
                 left_X += (afterX - beforeX) * move_X;
             } else {
-                if (parseFloat($li.first().css("left")) > 0) {
+                if (f > 0) {
                     left_X--;
                 }
-                if (parseFloat($li.last().css("left")) < 0) {
+                if (l < 0) {
                     left_X++;
                 }
             }
@@ -110,7 +114,7 @@ $(function() {
             beforeX = afterX;
         });
         $(document).mouseup(() => {
-            $(this).off("mousemove");
+            _this.off("mousemove");
             $(document).off("mouseup");
             let arr_offsetX = []; //存取li距离中心的的距离
 
@@ -130,12 +134,6 @@ $(function() {
                     "opacity": 1 - Math.abs(temp_num) / 400,
                     "transition": "0.5s all"
                 });
-                // 解决li站位是的屏幕变宽的bug
-                // if (Math.abs(parseFloat($(this).css("left"))) > 200) {
-                //     $(this).css("display", "none");
-                // } else {
-                //     $(this).css("display", "block");
-                // }
             });
 
             setTimeout(function() {
@@ -237,7 +235,6 @@ $(function() {
     function aniamte_rotateX() {
         $wrap.stop().css({
             transition: "all 1s",
-            // transform: "rotateX(" + rotate__X + "deg) rotateY(" + rotate__Y + "deg)  rotateZ(" + rotate__Z + "deg)",
             transform: "rotate3d(" + rotate__X + "," + rotate__Y + "," + rotate__Z + ",90deg)"
         });
     }

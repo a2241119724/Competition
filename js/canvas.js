@@ -46,7 +46,7 @@ $(function() {
 
     // section2(初始化时触发了滚动函数)
     $waterfall.scroll(function(event) {
-        let e = event || window.e;
+        let e = event || window.event;
         e.stopPropagation();
         $("#page2 .waterfall li:not(:last-child)").not("[is-loding]").each(function() {
             let timer = null;

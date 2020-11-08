@@ -35,9 +35,9 @@
 #window .add_window .wrap,
 #window .login_window .wrap,
 #window .register_window .wrap {
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    margin: 20px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    margin: 15px;
 }
 
 #window .updata_window .wrap form,
@@ -65,8 +65,8 @@
 #window .login_window .wrap form table input,
 #window .register_window .wrap form table input {
     width: calc(100% - 20px);
-    height: calc(100% - 10px);
-    padding: 0 0 0 5px;
+    height: calc(100% - 6px);
+    padding: 0 0 0 3px;
 }
 
 #window .updata_window .wrap form table tr:last-child button,
