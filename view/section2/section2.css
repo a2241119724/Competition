@@ -85,6 +85,7 @@
 #page2 .waterfall ul {
     position: relative;
     margin: 0 auto;
+    transform: translateX(-7.5px);
 }
 
 #page2 article:hover .waterfall ul {
