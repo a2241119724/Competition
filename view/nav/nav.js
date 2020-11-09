@@ -42,7 +42,7 @@ $(function() {
     })
     $li.find("a").click(function() {
         let top = $($(this).attr("data-href")).offset().top;
-        $("html,body").stop().animate({ scrollTop: top }, )
+        $("html,body").stop().animate({ scrollTop: top }, 1000)
     })
 
     $window.resize(function() {

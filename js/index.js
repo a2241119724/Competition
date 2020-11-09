@@ -2,6 +2,11 @@ let $window = $(window);
 let isOne = [true, false, true]; //调用一次
 let new_data = []; //存储数据
 let draw_table = null; //绘制表格
+let draw_item = null; //绘制表格中的内容
+let draw_canvas = null; //绘制表格中的内容的外框
+let count_of_count = 0; //每页数据
+let pagenum = 0; //页数
+let total = 0; //总页数
 
 document.write("<script src='./js/data.js' async='true'></script>");
 document.write("<script src='./view/background/background.js' async='true'></script>");
@@ -17,7 +22,7 @@ document.write("<script src='./view/window/window.js' async='true'></script>");
 
 $(function() {
     let point = $(".underline .point");
-    setInterval(() => {
+    setInterval(function() {
         point.animate({
             left: "150px"
         }, 2000, function() {

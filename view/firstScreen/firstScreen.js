@@ -198,9 +198,22 @@ $(function() {
     let $new_window = $("#window");
     let $updata_label = $("#window").find(".updata_window .wrap form table tr:nth-child(3) label");
     let $add_label = $("#window").find(".add_window .wrap form table tr:nth-child(2) label");
+    let $total_pagenum = $(".total_pagenum");
 
-    // let count_of_count = 50; //每页数据
-    let pagenum = 1; //页数
+    count_of_count = 30; //每页数据
+    pagenum = 1; //页数
+    total = Math.ceil(data.length / count_of_count);
+
+    // 更新总页数
+    $total_pagenum.text(total);
+
+    function pub_1() {
+        draw_table();
+        draw_item();
+        draw_canvas();
+        thead_ul();
+        isSelectedAll();
+    }
 
     // 是的头部的宽度与表中的一样
     function thead_ul() {
@@ -224,7 +237,7 @@ $(function() {
             tr_td.html('<td><input type="checkbox" ' + (nd.isSelect ? "checked" : "") + '></td>' +
                 '<td>' + nd.order + '</td>' +
                 '<td>' + nd.name + '</td>' +
-                '<td>' + nd.price + '元</td>' +
+                '<td style="min-width:150px;">' + nd.price + '元</td>' +
                 '<td>' + nd.author + '</td>' +
                 '<td><button class="delete" onclick="return false;">删除</button>' +
                 '</td>');
@@ -246,8 +259,17 @@ $(function() {
             $(this).addClass("bgr").siblings().removeClass("bgr");
         })
     }
-    new_data = data;
+    new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
     draw_table();
+
+    // 等draw_item被赋值后调用
+    let timer_1 = setInterval(function() {
+        if (Object.prototype.toString.call(draw_item).indexOf("Function") !== -1) {
+            draw_item();
+            draw_canvas();
+            clearInterval(timer_1);
+        }
+    }, 100)
 
     $window.resize(function() {
         thead_ul();
@@ -259,6 +281,7 @@ $(function() {
         // e.stopImmediatePropagation(); //阻止捕捉(也可以阻止冒泡)
     });
 
+    // 选择查询(将select数据给予input)
     $ul_option.click(function(event) {
         let e = event || window.event;
         let pv = $(e.target).prev(); //优化
@@ -276,21 +299,25 @@ $(function() {
         }
     })
 
+    // 是否全选
     $isAll.click(function() {
-        let _this = $(this);
+        let c = $(this).prop("checked")
         new_data.forEach(function(item) {
-            item.isSelect = _this.prop("checked");
-        })
-        draw_table();
-    })
+            item.isSelect = Number(c);
+        });
+        // draw_table();
+        // draw_item();
+        pub_1();
+    });
 
+    // 查询1
     $search.first().change(function() {
         new_data = [];
         let vl = $(this).val(); //优化
         if (isNaN(Number(vl))) {
             alert("你输入的有错误");
         } else if (vl == "") {
-            new_data = data;
+            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
         } else {
             data.forEach(function(item) {
                 if (item.order == vl) {
@@ -298,15 +325,15 @@ $(function() {
                 }
             })
         }
-        draw_table();
-        thead_ul();
-        isSelectedAll();
-    })
+        pub_1();
+    });
+
+    // 查询2
     $search.eq(1).change(function() {
         new_data = [];
         let vl = $(this).val(); //优化
         if (vl == "") {
-            new_data = data;
+            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
         } else {
             data.forEach(function(item) {
                 if (item.name == vl) {
@@ -314,32 +341,32 @@ $(function() {
                 }
             })
         }
-        draw_table();
-        thead_ul();
-        isSelectedAll();
+        pub_1();
     });
+
+    // 查询3
     $search.eq(2).change(function() {
         new_data = [];
         let vl = $(this).val(); //优化
         if (vl == "") {
-            new_data = data;
+            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
         } else {
             let max = Number($search.eq(3).val()) || Infinity;
-            data.forEach((item) => {
+            data.forEach(function(item) {
                 if (item.price >= Number(vl) && item.price < max) {
                     new_data.push(item);
                 }
             })
         }
-        draw_table();
-        thead_ul();
-        isSelectedAll();
+        pub_1();
     });
+
+    // 查询4
     $search.eq(3).change(function() {
         new_data = [];
         let vl = $(this).val(); //优化
         if (vl == "") {
-            new_data = data;
+            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
         } else {
             let min = Number($search.eq(2).val()) || -Infinity;
             data.forEach(function(item) {
@@ -348,33 +375,32 @@ $(function() {
                 }
             })
         }
-        draw_table();
-        thead_ul();
-        isSelectedAll();
+        pub_1();
     });
+
+    // 查询5
     $search.last().change(function() {
         new_data = [];
         let vl = $(this).val(); //优化
         if (vl == "") {
-            new_data = data;
+            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
         } else {
-            data.forEach((item) => {
+            data.forEach(function(item) {
                 if (item.author == vl) {
                     new_data.push(item);
                 }
             })
         }
-        draw_table();
-        thead_ul();
-        isSelectedAll();
+        pub_1();
     });
 
-    // 
+    // 删除单个数据
     $table.click(function(event) {
         let e = event || window.event;
         let pn = e.target.parentNode.parentNode;
         if (e.target.className === "delete") {
             if (confirm("真的要删除吗")) {
+
                 // 删除页面数据
                 pn.remove();
                 let delete_order = Number($(pn).find("td").eq(1).text());
@@ -383,20 +409,31 @@ $(function() {
                 data = data.filter(function(item) {
                     return item.order !== delete_order
                 });
-                new_data = new_data.filter(function(item) {
-                    return item.order !== delete_order
-                });
-                draw_table();
-                thead_ul();
-                isSelectedAll();
+                new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
+                // 更新总页数
+                total = Math.ceil(data.length / count_of_count);
+                $total_pagenum.text(total);
+                if (Number($pagenum.eq(1).find("input").val()) > Number($total_pagenum.text())) {
+                    pagenum = $total_pagenum.text();
+                    $pagenum.eq(1).find("input").val($total_pagenum.text());
+                    new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
+                }
+
+                pub_1();
             }
         }
         // 
         if (e.target.tagName === "INPUT") {
-            let newdata = new_data.filter(function(item) {
-                return item.order === Number($(e.target).parent().next().text());
-            })[0];
-            newdata.isSelect = !newdata.isSelect;
+            // let newdata = new_data.filter(function(item) {
+            //     return item.order === Number($(e.target).parent().next().text());
+            // })[0];
+            // newdata.isSelect = Number(!newdata.isSelect);
+
+            // 更新数据(不用重新渲染)
+            data.map(function(item) {
+                return item.order === Number($(e.target).parent().next().text()) ? (item.isSelect = Number(!item.isSelect)) : null;
+            });
+
             // 更改全选状态
             isSelectedAll();
         }
@@ -405,7 +442,7 @@ $(function() {
     // 判断数据是全部选中
     function isSelectedAll() {
         if (new_data.every(function(item) {
-                return item.isSelect === true;
+                return item.isSelect === 1;
             })) {
             // $isAll.attr("checked", true);
             $isAll.prop("checked", true);
@@ -421,7 +458,9 @@ $(function() {
             $new_window.css("display", "block");
             $new_window.find(">div[class=updata_window]").css("display", "block").siblings("div").css("display", "none");
             $updata_label.each(function(index) {
-                $(this).text($form.find("tr[class=bgr] td").eq(index + 1).text());
+                if (index !== 4) {
+                    $(this).text($form.find("tr[class=bgr] td").eq(index + 1).text());
+                }
             })
         } else {
             alert("请选择数据");
@@ -435,30 +474,61 @@ $(function() {
         $add_label.text(data.length);
     })
 
+    // 批量删除数据
+    $update_add.eq(2).click(function() {
+        if (confirm("真的要批量删除吗")) {
+            let delete_data = new_data.filter(function(item) {
+                return item.isSelect === 1;
+            });
+            data = data.filter(function(item) {
+                return delete_data.indexOf(item) === -1;
+            });
+            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
+            // 更新总页数
+            total = Math.ceil(data.length / count_of_count);
+            $total_pagenum.text(total);
+
+            // data = data.filter(function(item) {
+            //     return item.isSelect === 0;
+            // });
+            // new_data = data;
+            pub_1();
+        }
+    })
+
     // 初始化页数
     $pagenum.eq(1).find("input").val(pagenum);
     $pagenum.eq(0).find("i").click(function() {
         if (pagenum > 1) {
             pagenum--;
             $pagenum.eq(1).find("input").val(pagenum);
+            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
+            pub_1();
         }
     });
     $pagenum.eq(2).find("i").click(function() {
-        if (pagenum < 10) {
+        if (pagenum < total) {
             pagenum++;
             $pagenum.eq(1).find("input").val(pagenum);
+            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
+            pub_1();
         }
     });
 
+    //判断输入页数是否存在
     $pagenum_input.blur(function() {
         let v = Number($(this).val());
-        if (v > 10) {
-            pagenum = 10;
+        if (isNaN(v)) {
+            // 不变
+        } else if (v > total) {
+            pagenum = total;
         } else if (v < 1) {
             pagenum = 1;
         } else {
             pagenum = v;
         }
         $pagenum.eq(1).find("input").val(pagenum);
+        new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
+        pub_1();
     })
 })

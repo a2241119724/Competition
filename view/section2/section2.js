@@ -116,7 +116,7 @@ $(function() {
                 refresh();
             } else {
                 // 如果图片未加载成功开启定时器,知道img加载完成为止
-                timer = setInterval(() => {
+                timer = setInterval(function() {
                     if ($ul_img.find("li:not([is-loding]) img").height() !== 0) {
                         clearInterval(timer);
                     }

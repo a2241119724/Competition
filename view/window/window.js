@@ -4,6 +4,18 @@ $(function() {
     let $label = $new_window.find(".updata_window .wrap tr:nth-child(3) label");
     let $update_input = $new_window.find(".updata_window .wrap tr:nth-child(4) input");
     let $add_input = $new_window.find(".add_window .wrap tr:nth-child(n+3) input");
+    let $img_path1 = $("#img_path1");
+    let $res_path = $(".res_path");
+    let $total_pagenum = $(".total_pagenum");
+
+    // 改变input:file样式
+    $img_path1.change(function() {
+        if ($(this).prop("files").length === 0) {
+            $res_path.text(null);
+        } else {
+            $res_path.text($(this).prop("files")[0].name);
+        }
+    })
 
     // 取消按钮
     $cancle_determine.filter(".cancle").click(function() {
@@ -18,20 +30,29 @@ $(function() {
         newdata.name = $update_input.eq(0).val();
         newdata.price = $update_input.eq(1).val();
         newdata.author = $update_input.eq(2).val();
+        newdata.img_path = $update_input.eq(3).val();
         $new_window.css("display", "none");
+
         draw_table();
+        draw_item();
+        draw_canvas();
         alert("更改成功");
     })
 
     // 添加确定按钮
     $cancle_determine.filter(".add_determine").click(function() {
-        let add_arr = { "isSelect": false, "order": data.length, "name": "", "price": 0, "author": "" };
-        let v = $add_input.val(); //优化
-        add_arr.name = v;
-        add_arr.price = Number(v);
-        add_arr.author = v;
-        new_data.push(add_arr);
+        let add_arr = { "isSelect": 0, "order": data.length, "name": "", "price": 0, "author": "", img_path: "" };
+        add_arr.name = $add_input.eq(0).val();
+        add_arr.price = Number($add_input.eq(1).val());
+        add_arr.author = $add_input.eq(2).val();
+        add_arr.img_path = $add_input.eq(3).val();
+        data.push(add_arr);
         $new_window.css("display", "none");
+
+        // 更新总页数
+        total = Math.ceil(data.length / count_of_count);
+        $total_pagenum.text(total);
+
         draw_table();
         alert("添加成功");
     })

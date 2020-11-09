@@ -113,7 +113,7 @@ $(function() {
             // 改变初始值
             beforeX = afterX;
         });
-        $(document).mouseup(() => {
+        $(document).mouseup(function() {
             _this.off("mousemove");
             $(document).off("mouseup");
             let arr_offsetX = []; //存取li距离中心的的距离

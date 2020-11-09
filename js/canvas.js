@@ -1,5 +1,4 @@
 $(function() {
-    let $item = $("#page1 .row .row_item");
     let $waterfall = $("#page2 .waterfall");
     let $window_canvas = $("#window_canvas");
 
@@ -10,16 +9,19 @@ $(function() {
     light($window_canvas[0], 0.02);
 
     // section1
-    $item.each(function() {
-        canvas_width[0] = $(this).find(".border").outerWidth();
-        canvas_height[0] = $(this).find(".border").outerHeight();
-        $(this).find(".border").append($("<canvas id=item" + $(this).index() + " width=" + (canvas_width[0] + 1) + " height=" + canvas_height[0] + "></canvas>"));
-        $("#item" + $(this).index()).css({
-            "top": -1.5 + "px",
-            "left": -1.5 + "px"
-        });
-        light($("#item" + $(this).index())[0]);
-    })
+    draw_canvas = function() {
+        let $item = $("#page1 .row .row_item");
+        $item.each(function() {
+            canvas_width[0] = $(this).find(".border").outerWidth();
+            canvas_height[0] = $(this).find(".border").outerHeight();
+            $(this).find(".border").append($("<canvas id=item" + $(this).index() + " width=" + (canvas_width[0] + 1) + " height=" + canvas_height[0] + "></canvas>"));
+            $("#item" + $(this).index()).css({
+                "top": -1.5 + "px",
+                "left": -1.5 + "px"
+            });
+            light($("#item" + $(this).index())[0]);
+        })
+    }
 
     // 加载canvas
     function loadCanvas($this, timer) {
@@ -50,21 +52,22 @@ $(function() {
         e.stopPropagation();
         $("#page2 .waterfall li:not(:last-child)").not("[is-loding]").each(function() {
             let timer = null;
+            let _this = $(this);
             // 判断图片是否加载完成
             // $(this).find("img")[0].complate
-            if ($(this).find("img").height() !== 0) {
-                loadCanvas($(this), timer);
+            if (_this.find("img").height() !== 0) {
+                loadCanvas(_this, timer);
             } else {
                 // 如果图片未加载成功开启定时器,知道img加载完成为止
-                timer = setInterval(() => {
-                    loadCanvas($(this), timer);
+                timer = setInterval(function() {
+                    loadCanvas(_this, timer);
                 }, 10)
             }
         })
     });
 
     $window.resize(function() {
-        $item.each(function() {
+        $("#page1 .row .row_item").each(function() {
             canvas_width[0] = $(this).find(".border").outerWidth()
             canvas_height[0] = $(this).find(".border").outerHeight()
             $(this).find(".border canvas").css({
@@ -74,9 +77,9 @@ $(function() {
         })
     })
 
-    function light(canvas, linear_width = 0.04) {
+    function light(canvas, linear_width) {
         let ctx = canvas.getContext("2d");
-
+        linear_width = linear_width || 0.04;
         // let linear_width = 0.04; //发光边框的宽度
         let linear_light = 0.9; //发光边框的亮度
         let center_light = 0.1; //canvas中间的亮度

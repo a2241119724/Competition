@@ -20,7 +20,7 @@
                     <table cellpadding="0">
                         <tr>
                             <td>账号</td>
-                            <td style="transform:scaleY(1.4);"><input type="text"></td>
+                            <td><input type="text"></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -28,7 +28,7 @@
                         </tr>
                         <tr>
                             <td>密码</td>
-                            <td style="transform:scaleY(1.4);"><input type="password" name="" id=""></td>
+                            <td><input type="password" name=""></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -60,12 +60,24 @@
                             <td><input type="text"></td>
                         </tr>
                         <tr>
+                            <td></td>
+                            <td height="10"><span style="font-size: 12px;">提示信息</span></td>
+                        </tr>
+                        <tr>
                             <td>密码:</td>
                             <td><input type="password" name=""></td>
                         </tr>
                         <tr>
+                            <td></td>
+                            <td height="10"><span style="font-size: 12px;">提示信息</span></td>
+                        </tr>
+                        <tr>
                             <td>再次确认:</td>
                             <td><input type="password" name=""></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td height="10"><span style="font-size: 12px;">提示信息</span></td>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -82,16 +94,17 @@
                 <form action="">
                     <table border="1" cellspacing="1">
                         <tr>
-                            <th colspan="5">
+                            <th colspan="6">
                                 <h3>修改数据</h3>
                             </th>
                         </tr>
                         <tr>
                             <td></td>
                             <td>序号</td>
-                            <td>作者</td>
+                            <td>书名</td>
                             <td>价格</td>
-                            <td>文字</td>
+                            <td>作者</td>
+                            <td>图片路径</td>
                         </tr>
                         <tr>
                             <td>修改前</td>
@@ -99,6 +112,7 @@
                             <td><label for="author"></label></td>
                             <td><label for="price"></label></td>
                             <td><label for="text"></label></td>
+                            <td><label for=""></label></td>
                         </tr>
                         <tr>
                             <td>修改后</td>
@@ -106,9 +120,15 @@
                             <td><input type="text"></td>
                             <td><input type="text"></td>
                             <td><input type="text"></td>
+                            <td>
+                                <label for="img_path">
+                                    <div style="padding:3px;margin:0 5px;width: 4em;height:1.5em;border: 1px solid black;border-radius: 4px; background-image: linear-gradient(to left, rgb(255, 115, 0), rgb(229, 255, 0));">上传图片</div>
+                                </label>
+                                <input type="file" name="" style="display:none;" id="img_path">
+                            </td>
                         </tr>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="6">
                                 <button onclick="return false;" class="cancle">取消</button>
                                 <button onclick="return false;" class="updata_determine">确定</button>
                             </td>
@@ -129,7 +149,7 @@
                             <td><label for=""></label></td>
                         </tr>
                         <tr>
-                            <td>名字</td>
+                            <td>书名</td>
                             <td><input type="text"></td>
                         </tr>
                         <tr>
@@ -139,6 +159,16 @@
                         <tr>
                             <td>作者</td>
                             <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>图片路径</td>
+                            <td>
+                                <label for="img_path1">
+                                    <div style="display: inline-block; padding:3px;margin:0 5px;width: 4em;height:1.5em;border: 1px solid black;border-radius: 4px; background-image: linear-gradient(to left, rgb(255, 115, 0), rgb(229, 255, 0));">上传图片</div>
+                                    <span type="text" style="width: calc(100% - 105px);display: inline-block;" class="res_path"></span>
+                                </label>
+                                <input type="file" name="" style="display:none;" id="img_path1">
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -295,7 +325,7 @@
                                     <lable>序号</lable>
                                 </th>
                                 <th>
-                                    <lable>名字</lable>
+                                    <lable>书名</lable>
                                 </th>
                                 <th>
                                     <lable>价格</lable>
@@ -304,7 +334,7 @@
                                     <lable>作者</lable>
                                 </th>
                                 <th>
-                                    <lable>更新</lable>
+                                    <lable>操作</lable>
                                 </th>
                             </tr>
                         </thead>
@@ -362,6 +392,7 @@
                     <div class="btns">
                         <button class="update">修改</button>
                         <button class="add">添加</button>
+                        <button class="add">删除</button>
                     </div>
                     <div class="pageNum">
                         <div>
@@ -369,7 +400,7 @@
                         </div>
                         <div class="toggle_num">
                             <input type="text"> /
-                            <table>10</table>
+                            <span class="total_pagenum">5</span>
                         </div>
                         <div>
                             <i class="iconfont">&#xe646;</i>
@@ -413,121 +444,12 @@
     </nav>
     <section id="page1">
         <section class="title">
-            <h3>我的信息</h3>
+            <h3>我的收藏</h3>
             <div class="underline">
                 <div class="point"></div>
             </div>
         </section>
-        <div class="row">
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/1.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/12.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/11.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/10.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/9.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/2.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/3.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/4.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/5.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/6.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/7.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row_item">
-                <div class="border">
-                    <div class="warp"><img src="./assets/images/8.jpg" alt=""></div>
-                    <div class="content">
-                        <h4>你的名字</h4>
-                        <p>请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮请按照我随心而动吃软饭吗通过毕业后怒江面孔凉皮</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="row"></div>
     </section>
     <section id="page2" class="clearFloat">
         <section class="title">
