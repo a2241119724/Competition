@@ -436,8 +436,8 @@
     width: 110px;
     height: 100%;
     text-align: center;
-    line-height: 50px;
     background-color: aquamarine;
+    line-height: 50px;
 }
 
 #firstScreen .message .bottom .data_total span {
