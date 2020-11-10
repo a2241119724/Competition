@@ -199,10 +199,14 @@ $(function() {
     let $updata_label = $("#window").find(".updata_window .wrap form table tr:nth-child(3) label");
     let $add_label = $("#window").find(".add_window .wrap form table tr:nth-child(2) label");
     let $total_pagenum = $(".total_pagenum");
+    let $data_total = $("#firstScreen .message .bottom .data_total span:eq(1)");
 
-    count_of_count = 30; //每页数据
+    let select_state = false; //查询状态
+    let before_pagenum = 0; //进入查询状态之前的页面数
+
+    page_of_count = 30; //每页数据
     pagenum = 1; //页数
-    total = Math.ceil(data.length / count_of_count);
+    total = Math.ceil(data.length / page_of_count); //github第一次报错
 
     // 更新总页数
     $total_pagenum.text(total);
@@ -235,7 +239,7 @@ $(function() {
             let nd = new_data[i]; //优化
             let tr_td = $("<tr>");
             tr_td.html('<td><input type="checkbox" ' + (nd.isSelect ? "checked" : "") + '></td>' +
-                '<td>' + nd.order + '</td>' +
+                '<td style="min-width:70px;">' + nd.order + '</td>' +
                 '<td>' + nd.name + '</td>' +
                 '<td style="min-width:150px;">' + nd.price + '元</td>' +
                 '<td>' + nd.author + '</td>' +
@@ -259,8 +263,9 @@ $(function() {
             $(this).addClass("bgr").siblings().removeClass("bgr");
         })
     }
-    new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
+    new_data = data.slice(page_of_count * (pagenum - 1), page_of_count * pagenum);
     draw_table();
+    $data_total.text(data.length);
 
     // 等draw_item被赋值后调用
     let timer_1 = setInterval(function() {
@@ -284,18 +289,22 @@ $(function() {
     // 选择查询(将select数据给予input)
     $ul_option.click(function(event) {
         let e = event || window.event;
-        let pv = $(e.target).prev(); //优化
-        if (e.target.tagName.toLowerCase() === "li") {
-            //错误
-        } else if (pv.prev().length == 1) {
-            let min_max = $(e.target).val().match(/\w+(\.\w+)?/g);
-            pv.prev().prev().val(min_max[0]);
-            pv.val(min_max[1]);
-            pv.prev().prev().trigger("change");
-            pv.trigger("change");
-        } else if (e.target.tagName.toLowerCase() === "select") {
-            pv.val($(e.target).val());
-            pv.trigger("change");
+        if (e.target.selectedIndex === -1 || e.target.selectedIndex === 0) {
+            // 解决bug
+        } else {
+            let pv = $(e.target).prev(); //优化
+            if (e.target.tagName.toLowerCase() === "li") {
+                //错误
+            } else if (pv.prev().length == 1) {
+                let min_max = $(e.target).val().match(/\w+(\.\w+)?/g);
+                pv.prev().prev().val(min_max[0]);
+                pv.val(min_max[1]);
+                pv.prev().prev().trigger("change");
+                pv.trigger("change");
+            } else if (e.target.tagName.toLowerCase() === "select") {
+                pv.val($(e.target).val());
+                pv.trigger("change");
+            }
         }
     })
 
@@ -310,86 +319,109 @@ $(function() {
         pub_1();
     });
 
-    // 查询1
-    $search.first().change(function() {
+    // 查询
+    $search.change(function(e, issecond = true) {
         new_data = [];
-        let vl = $(this).val(); //优化
-        if (isNaN(Number(vl))) {
-            alert("你输入的有错误");
-        } else if (vl == "") {
-            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
-        } else {
-            data.forEach(function(item) {
-                if (item.order == vl) {
-                    new_data.push(item);
-                }
-            })
-        }
-        pub_1();
-    });
+        let v_0 = $search.first().val(); //优化
+        let v_2 = $search.eq(1).val(); //优化
+        let v_3 = $search.eq(2).val(); //优化
+        let v_4 = $search.eq(3).val(); //优化
+        let v_5 = $search.eq(4).val(); //优化
 
-    // 查询2
-    $search.eq(1).change(function() {
-        new_data = [];
-        let vl = $(this).val(); //优化
-        if (vl == "") {
-            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
+        if (v_0 == "" && v_2 == "" && v_3 == "" && v_4 == "" && v_5 == "") {
+            select_state = false; //更新为非查询状态
+            pagenum = before_pagenum; //更新页数
+            $pagenum.eq(1).find("input").val(pagenum); //渲染总页数
+            new_data = data.slice(page_of_count * (pagenum - 1), page_of_count * pagenum);
+            total = Math.ceil(data.length / page_of_count); // 更新总页数
+            $total_pagenum.text(total); //渲染总页数
+            $data_total.text(data.length);
         } else {
-            data.forEach(function(item) {
-                if (item.name == vl) {
-                    new_data.push(item);
-                }
+            //分别存取input查到的数据
+            let arr = [
+                [],
+                [],
+                [],
+                [],
+                []
+            ];
+            // 查询1
+            if (isNaN(Number(v_0))) {
+                alert("你输入的有错误");
+            } else if (v_0 == "") {
+                arr[0] = data;
+            } else {
+                data.forEach(function(item) {
+                    if (item.order == v_0) {
+                        arr[0].push(item);
+                    }
+                })
+            }
+            // 查询2
+            if (v_2 == "") {
+                arr[1] = data;
+            } else {
+                data.forEach(function(item) {
+                    if (item.name == v_2) {
+                        arr[1].push(item);
+                    }
+                })
+            }
+            // 查询3
+            if (v_3 == "") {
+                arr[2] = data;
+            } else {
+                let max = Number($search.eq(3).val()) || Infinity;
+                data.forEach(function(item) {
+                    if (item.price >= Number(v_3) && item.price < max) {
+                        arr[2].push(item);
+                    }
+                })
+            }
+            // 查询4
+            if (v_4 == "") {
+                arr[3] = data;
+            } else {
+                let min = Number($search.eq(2).val()) || -Infinity;
+                data.forEach(function(item) {
+                    if (item.price <= Number(v_4) && item.price > min) {
+                        arr[3].push(item);
+                    }
+                })
+            }
+            // 查询5
+            if (v_5 == "") {
+                arr[4] = data;
+            } else {
+                data.forEach(function(item) {
+                    if (item.author == v_5) {
+                        arr[4].push(item);
+                    }
+                })
+            }
+            // 找出arr中所有数组的重复数据
+            arr[0] = arr[0].filter(function(ele) {
+                return arr[1].includes(ele);
             })
-        }
-        pub_1();
-    });
+            arr[0] = arr[0].filter(function(ele) {
+                return arr[2].includes(ele);
+            })
+            arr[0] = arr[0].filter(function(ele) {
+                return arr[3].includes(ele);
+            })
+            arr[0] = arr[0].filter(function(ele) {
+                return arr[4].includes(ele);
+            });
+            // new_data = arr[0];
 
-    // 查询3
-    $search.eq(2).change(function() {
-        new_data = [];
-        let vl = $(this).val(); //优化
-        if (vl == "") {
-            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
-        } else {
-            let max = Number($search.eq(3).val()) || Infinity;
-            data.forEach(function(item) {
-                if (item.price >= Number(vl) && item.price < max) {
-                    new_data.push(item);
-                }
-            })
-        }
-        pub_1();
-    });
-
-    // 查询4
-    $search.eq(3).change(function() {
-        new_data = [];
-        let vl = $(this).val(); //优化
-        if (vl == "") {
-            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
-        } else {
-            let min = Number($search.eq(2).val()) || -Infinity;
-            data.forEach(function(item) {
-                if (item.price <= Number(vl) && item.price > min) {
-                    new_data.push(item);
-                }
-            })
-        }
-        pub_1();
-    });
-
-    // 查询5
-    $search.last().change(function() {
-        new_data = [];
-        let vl = $(this).val(); //优化
-        if (vl == "") {
-            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
-        } else {
-            data.forEach(function(item) {
-                if (item.author == vl) {
-                    new_data.push(item);
-                }
-            })
+            before_pagenum = select_state ? before_pagenum : pagenum; //记录查询前页数
+            pagenum = issecond ? 1 : pagenum; //更新页数(判断是否是再次查询)
+            $pagenum.eq(1).find("input").val(pagenum); //渲染页数
+            $data_total.text(arr[0].length);
+            new_data = arr[0].slice(page_of_count * (pagenum - 1), page_of_count * pagenum); //更新数据
+            total = Math.ceil(arr[0].length / page_of_count); // 更新总页数
+            $total_pagenum.text(total); //渲染总页数
+            select_state = true; //更新为查询状态
         }
         pub_1();
     });
@@ -400,7 +432,6 @@ $(function() {
         let pn = e.target.parentNode.parentNode;
         if (e.target.className === "delete") {
             if (confirm("真的要删除吗")) {
-
                 // 删除页面数据
                 pn.remove();
                 let delete_order = Number($(pn).find("td").eq(1).text());
@@ -409,17 +440,20 @@ $(function() {
                 data = data.filter(function(item) {
                     return item.order !== delete_order
                 });
-                new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
-                // 更新总页数
-                total = Math.ceil(data.length / count_of_count);
-                $total_pagenum.text(total);
-                if (Number($pagenum.eq(1).find("input").val()) > Number($total_pagenum.text())) {
-                    pagenum = $total_pagenum.text();
-                    $pagenum.eq(1).find("input").val($total_pagenum.text());
-                    new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
-                }
 
-                pub_1();
+                if (select_state) {
+                    $search.first().trigger("change", false);
+                } else {
+                    new_data = data.slice(page_of_count * (pagenum - 1), page_of_count * pagenum); // 更新总页数
+                    total = Math.ceil(data.length / page_of_count);
+                    $total_pagenum.text(total);
+                    if (Number($pagenum.eq(1).find("input").val()) > Number($total_pagenum.text())) {
+                        pagenum = $total_pagenum.text();
+                        $pagenum.eq(1).find("input").val($total_pagenum.text());
+                        new_data = data.slice(page_of_count * (pagenum - 1), page_of_count * pagenum);
+                    }
+                    pub_1();
+                }
             }
         }
         // 
@@ -483,16 +517,20 @@ $(function() {
             data = data.filter(function(item) {
                 return delete_data.indexOf(item) === -1;
             });
-            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
-            // 更新总页数
-            total = Math.ceil(data.length / count_of_count);
-            $total_pagenum.text(total);
+            if (select_state) {
+                $search.first().trigger("change", false);
+            } else {
+                new_data = data.slice(page_of_count * (pagenum - 1), page_of_count * pagenum);
+                // 更新总页数
+                total = Math.ceil(data.length / page_of_count);
+                $total_pagenum.text(total);
 
-            // data = data.filter(function(item) {
-            //     return item.isSelect === 0;
-            // });
-            // new_data = data;
-            pub_1();
+                // data = data.filter(function(item) {
+                //     return item.isSelect === 0;
+                // });
+                // new_data = data;
+                pub_1();
+            }
         }
     })
 
@@ -502,16 +540,24 @@ $(function() {
         if (pagenum > 1) {
             pagenum--;
             $pagenum.eq(1).find("input").val(pagenum);
-            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
-            pub_1();
+            if (select_state) {
+                $search.first().trigger("change", false);
+            } else {
+                new_data = data.slice(page_of_count * (pagenum - 1), page_of_count * pagenum);
+                pub_1();
+            }
         }
     });
     $pagenum.eq(2).find("i").click(function() {
         if (pagenum < total) {
             pagenum++;
             $pagenum.eq(1).find("input").val(pagenum);
-            new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
-            pub_1();
+            if (select_state) {
+                $search.first().trigger("change", false);
+            } else {
+                new_data = data.slice(page_of_count * (pagenum - 1), page_of_count * pagenum);
+                pub_1();
+            }
         }
     });
 
@@ -528,7 +574,7 @@ $(function() {
             pagenum = v;
         }
         $pagenum.eq(1).find("input").val(pagenum);
-        new_data = data.slice(count_of_count * (pagenum - 1), count_of_count * pagenum);
+        new_data = data.slice(page_of_count * (pagenum - 1), page_of_count * pagenum);
         pub_1();
     })
 })

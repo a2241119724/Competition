@@ -7,6 +7,8 @@ $(function() {
     let $img_path1 = $("#img_path1");
     let $res_path = $(".res_path");
     let $total_pagenum = $(".total_pagenum");
+    let $data_total = $("#firstScreen .message .bottom .data_total span:eq(1)");
+    let $search = $("#firstScreen .message .message_center ul input");
 
     // 改变input:file样式
     $img_path1.change(function() {
@@ -49,9 +51,13 @@ $(function() {
         data.push(add_arr);
         $new_window.css("display", "none");
 
-        // 更新总页数
-        total = Math.ceil(data.length / count_of_count);
-        $total_pagenum.text(total);
+        // // 更新总页数
+        // total = Math.ceil(data.length / page_of_count);
+        // $total_pagenum.text(total);
+
+        // // 更新总数据
+        // $data_total.text(new_data.length);
+        $search.first().trigger("change", false);
 
         draw_table();
         alert("添加成功");

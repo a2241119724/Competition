@@ -4,7 +4,7 @@ let new_data = []; //存储数据
 let draw_table = null; //绘制表格
 let draw_item = null; //绘制表格中的内容
 let draw_canvas = null; //绘制表格中的内容的外框
-let count_of_count = 0; //每页数据
+let page_of_count = 0; //每页数据
 let pagenum = 0; //页数
 let total = 0; //总页数
 

@@ -432,6 +432,19 @@
     outline: none;
 }
 
+#firstScreen .message .bottom .data_total {
+    width: 110px;
+    height: 100%;
+    text-align: center;
+    line-height: 50px;
+    background-color: aquamarine;
+}
+
+#firstScreen .message .bottom .data_total span {
+    color: black;
+    font-weight: bold;
+}
+
 #firstScreen .message .bottom .pageNum {
     flex: 24;
     background-color: chocolate;
