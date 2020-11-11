@@ -3,6 +3,7 @@ $(function() {
     let $section3 = $("#page3")
     let $bg = $section3.find(".main");
 
+    // 背景移动
     function bgMove() {
         if ($section3.offset().top < ($window.scrollTop() + $window.height()) && ($section3.offset().top + $section3.height()) > $window.scrollTop()) {
             $bg.css({

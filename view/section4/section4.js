@@ -177,6 +177,11 @@ $(function() {
         bar2.move();
     })
 
+    /**
+     * 
+     * @param {柱状图相对canvas横坐标} x 
+     * @param {柱状图最大宽度} maxheight 
+     */
     function CreateBar(x, maxheight) {
         this.x = x;
         this.maxheight = maxheight;

@@ -14,7 +14,12 @@ $(function() {
     ctx.shadowBlur = 10;
     ctx.shadowColor = "rgba(100,100,100,0.5)";
 
-    // 三角形
+    /**
+     * 等腰三角形
+     * @param {左下角横坐标} x 
+     * @param {左下角纵坐标} y 
+     * @param {三角形大小} size 
+     */
     function CreateTriangle(x, y, size) {
         this.x = x;
         this.y = y;
@@ -44,7 +49,13 @@ $(function() {
         }
     }
 
-    // 圆形
+    /**
+     * 圆形
+     * @param {圆心横坐标} x 
+     * @param {圆心纵坐标} y 
+     * @param {半径} radius 
+     * @param {透明度} opacity 
+     */
     function CreateCircle(x, y, radius, opacity) {
         this.x = x;
         this.y = y;
@@ -69,6 +80,12 @@ $(function() {
     }
 
     // 心形
+    /**
+     * 
+     * @param {心形最左边横坐标} x 
+     * @param {心形最左边纵坐标} y 
+     * @param {心形大小} size 
+     */
     function CreateHeart(x, y, size) {
         this.x = x;
         this.y = y;
@@ -109,6 +126,7 @@ $(function() {
         }
     }
 
+    // 随机生成形状
     function random_object() {
         let random_count = Math.floor(Math.random() * 3);
         let object = null;
@@ -142,6 +160,7 @@ $(function() {
     // setInterval(animate, 10);
     animate();
 
+    // 动画
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         init();

@@ -134,6 +134,12 @@ $(function() {
         init_1();
     });
 
+    /**
+     * 
+     * @param {渐进红色} red 
+     * @param {渐进绿色} green 
+     * @param {渐进蓝色} blue 
+     */
     function CreateLinear(red, green, blue) {
         this.red = red;
         this.green = green;
@@ -170,6 +176,7 @@ $(function() {
 
     linearAnimate();
 
+    // 渐进动画
     function linearAnimate() {
         // 清除画布
         ctx.clearRect(0, 0, linearCanvas.width, linearCanvas.height);
@@ -211,6 +218,7 @@ $(function() {
     // 更新总页数
     $total_pagenum.text(total);
 
+    // 公共样式
     function pub_1() {
         draw_table();
         draw_item();
@@ -267,9 +275,9 @@ $(function() {
     draw_table();
     $data_total.text(data.length);
 
-    // 等draw_item被赋值后调用
+    // 等draw_item,draw_canvas被赋值后调用
     let timer_1 = setInterval(function() {
-        if (Object.prototype.toString.call(draw_item).indexOf("Function") !== -1) {
+        if (Object.prototype.toString.call(draw_item).indexOf("Function") !== -1 && Object.prototype.toString.call(draw_canvas).indexOf("Function") !== -1) {
             draw_item();
             draw_canvas();
             clearInterval(timer_1);

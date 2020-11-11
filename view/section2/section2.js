@@ -41,6 +41,7 @@ $(function() {
         }
     }, 1000);
 
+    // 重新渲染
     function refresh() {
         arr_height = [];
         $ul_img.find("li").each(function(index, item) { //遍历图片li
