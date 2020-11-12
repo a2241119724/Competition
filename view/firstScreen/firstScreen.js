@@ -203,10 +203,13 @@ $(function() {
     let $pagenum = $b.find(".pageNum div");
     let $pagenum_input = $b.find(".pageNum .toggle_num input");
     let $new_window = $("#window");
-    let $updata_label = $("#window").find(".updata_window .wrap form table tr:nth-child(3) label");
-    let $add_label = $("#window").find(".add_window .wrap form table tr:nth-child(2) label");
+    let $updata_input = $new_window.find(".updata_window .wrap form table tr input");
+    let $add_label = $new_window.find(".add_window .wrap form table tr:nth-child(2) label");
     let $total_pagenum = $(".total_pagenum");
     let $data_total = $("#firstScreen .message .bottom .data_total span:eq(1)");
+    let $updata_textarea = $new_window.find(".updata_window .wrap tr textarea");
+    let $res_path = $(".res_path"); //updata书籍图片路径
+    let $res_path1 = $(".res_path1"); //add书籍图片路径
 
     let select_state = false; //查询状态
     let before_pagenum = 0; //进入查询状态之前的页面数
@@ -338,7 +341,7 @@ $(function() {
 
         if (v_0 == "" && v_2 == "" && v_3 == "" && v_4 == "" && v_5 == "") {
             select_state = false; //更新为非查询状态
-            pagenum = before_pagenum; //更新页数
+            pagenum = issecond ? before_pagenum : pagenum; //更新页数(判断是否是再次查询)
             $pagenum.eq(1).find("input").val(pagenum); //渲染总页数
             new_data = data.slice(page_of_count * (pagenum - 1), page_of_count * pagenum);
             total = Math.ceil(data.length / page_of_count); // 更新总页数
@@ -499,11 +502,18 @@ $(function() {
         if ($form.find("tr").hasClass("bgr")) {
             $new_window.css("display", "block");
             $new_window.find(">div[class=updata_window]").css("display", "block").siblings("div").css("display", "none");
-            $updata_label.each(function(index) {
+            $updata_input.each(function(index) {
                 if (index !== 4) {
-                    $(this).text($form.find("tr[class=bgr] td").eq(index + 1).text());
+                    $(this).val($form.find("tr[class=bgr] td").eq(index + 1).text());
                 }
-            })
+            });
+            // 
+            let d = new_data.filter(function(item) {
+                return Number($form.find("tr[class=bgr] td").eq(1).text()) === item.order;
+            });
+            $res_path.text(d[0].img_path);
+            // 书籍简介
+            $updata_textarea.val(d[0].data);
         } else {
             alert("请选择数据");
         }

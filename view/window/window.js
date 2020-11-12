@@ -1,23 +1,34 @@
 $(function() {
     let $new_window = $("#window");
     let $cancle_determine = $new_window.find(".wrap tr:last-child button");
-    let $label = $new_window.find(".updata_window .wrap tr:nth-child(3) label");
-    let $update_input = $new_window.find(".updata_window .wrap tr:nth-child(4) input");
+    let $update_input = $new_window.find(".updata_window .wrap tr input");
     let $add_input = $new_window.find(".add_window .wrap tr:nth-child(n+3) input");
+    let $add_textarea = $new_window.find(".add_window .wrap tr textarea");
+    let $updata_textarea = $new_window.find(".updata_window .wrap tr textarea");
+    let $img_path = $("#img_path");
     let $img_path1 = $("#img_path1");
     let $res_path = $(".res_path");
-    let $total_pagenum = $(".total_pagenum");
-    let $data_total = $("#firstScreen .message .bottom .data_total span:eq(1)");
+    let $res_path1 = $(".res_path1");
     let $search = $("#firstScreen .message .message_center ul input");
 
     // 改变input:file样式
-    $img_path1.change(function() {
+    // 更改数据
+    $img_path.change(function() {
         if ($(this).prop("files").length === 0) {
             $res_path.text(null);
         } else {
             $res_path.text($(this).prop("files")[0].name);
         }
-    })
+    });
+    // 添加数据
+    $img_path1.change(function() {
+        if ($(this).prop("files").length === 0) {
+            $res_path1.text(null);
+        } else {
+            $res_path1.text($(this).prop("files")[0].name);
+        }
+    });
+
 
     // 取消按钮
     $cancle_determine.filter(".cancle").click(function() {
@@ -27,12 +38,13 @@ $(function() {
     // 更改确定按钮
     $cancle_determine.filter(".updata_determine").click(function() {
         let newdata = new_data.filter(function(item) {
-            return item.order === Number($label.eq(0).text());
+            return item.order === Number($update_input.eq(0).val());
         })[0];
-        newdata.name = $update_input.eq(0).val();
-        newdata.price = $update_input.eq(1).val();
-        newdata.author = $update_input.eq(2).val();
-        newdata.img_path = $update_input.eq(3).val();
+        newdata.name = $update_input.eq(1).val();
+        newdata.price = $update_input.eq(2).val();
+        newdata.author = $update_input.eq(3).val();
+        newdata.img_path = $update_input.eq(4).val() || newdata.img_path;
+        newdata.data = $updata_textarea.val();
         $new_window.css("display", "none");
 
         draw_table();
@@ -43,11 +55,12 @@ $(function() {
 
     // 添加确定按钮
     $cancle_determine.filter(".add_determine").click(function() {
-        let add_arr = { "isSelect": 0, "order": data.length, "name": "", "price": 0, "author": "", img_path: "" };
+        let add_arr = { "isSelect": 0, "order": data.length, "name": "", "price": 0, "author": "", img_path: "", data: "" };
         add_arr.name = $add_input.eq(0).val();
         add_arr.price = Number($add_input.eq(1).val());
         add_arr.author = $add_input.eq(2).val();
         add_arr.img_path = $add_input.eq(3).val();
+        add_arr.data = $add_textarea.val();
         data.push(add_arr);
         $new_window.css("display", "none");
 

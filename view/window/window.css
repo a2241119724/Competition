@@ -55,10 +55,10 @@
 }
 
 #window .updata_window .wrap form table tr td:first-child {
-    width: 4em;
+    width: 5em;
 }
 
-#window .updata_window .wrap form table tr:nth-child(4) input,
+#window .updata_window .wrap form table tr input,
 #window .add_window .wrap form table tr:nth-child(n+3) input,
 #window .login_window .wrap form table input,
 #window .register_window .wrap form table input {

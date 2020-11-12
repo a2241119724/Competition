@@ -10,7 +10,7 @@ let total = 0; //总页数
 
 document.write("<script src='./js/data.js' async='true'></script>");
 document.write("<script src='./view/background/background.js' async='true'></script>");
-document.write("<script src='./view/firstScreen/firstScreen.js' async='true'></script>");
+document.write("<script src='./view/firstScreen/firstScreen.js'></script>"); //同步解决获取不到数据的bug
 document.write("<script src='./view/header/header.js' async='true'></script>");
 document.write("<script src='./view/nav/nav.js' async='true'></script>");
 document.write("<script src='./view/section1/section1.js' async='true'></script>");
