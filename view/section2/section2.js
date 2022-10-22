@@ -1,4 +1,6 @@
 $(function() {
+    let _image = ["Py8hS","PyjGK","Py9es","PyloB","PyYsg","PyVyl","PysWb","PycjP","Py0R6","PyShF","PyGID","PyEEI","PyLe1","PyHaG","Py4sM","PyUvg","PyTTl","Py59b","PyqPP","Pyoz6","PyOuF","PyMLD","Pvw7I","PvCO1","PvIcG","PvuvM","PvXTr","Pv6lc","Pv2Pq","Pvjzv","PvlXY","PvfLU","PvY7p","PvVMj","Pvdcx","Pv1KG","PvnBM","Pvhfr","PvFpc","Pvzxq","Pvq5t","PvaYX","PvOpi","PvMkL","PZC6C","PZ3DN","PZInS","PZXwa","PZ8SK","PZfkb","PZV6P","PZs46","PZdnF","PZ0CD","PZSQI","PZGqG","PZLYM","PZHmr","PZDbc","PZt6q","PZR4v","PZPiY","PZpCU","PZmQp","PZgrj","PZyqx","PZZVt","PZKgX","PZAbi","PZe2L","PZNtC","PZ7iN","PZn3S","PZiQa","PZhrK","PZOo1","PKwsG","PKCgM","PK3Wr","PKujc","PKXtq","PK8hv","PK2IY","PKjGU","PK9ep","PKlaj","PKYsx","PKVyt","PKsUX","PKcji","PK0RL","PKSFC","PKGIN","PKEES","PKLea",];
+
     //开始====================瀑布流====================//
     let $waterfall = $("#page2 .waterfall");
     let $ul_img = $waterfall.find("ul");
@@ -103,7 +105,8 @@ $(function() {
             count = $ul_img.find("li").length;
             $('<li>' +
                 '<div class="wrap">' +
-                '<img src="./assets/images/' + Math.ceil(Math.random() * 84) + '.jpg" alt="快乐">' +
+                // '<img src="./assets/images/' + Math.ceil(Math.random() * 84) + '.jpg" alt="快乐">' +
+                '<img src="https://i.imgtg.com/2022/10/22/' + _image[Math.ceil(Math.random() * 94)] + '.jpg" alt="快乐">' +
                 '<div class="message">' +
                 '<h4>图片' + count + '</h4>' +
                 '<p>中秋国庆快乐</p>' +
