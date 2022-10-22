@@ -216,7 +216,8 @@ $(function() {
 
     page_of_count = 30; //每页数据
     pagenum = 1; //页数
-    total = Math.ceil(data.length / page_of_count); //github第一次报错
+    // total = Math.ceil(data.length / page_of_count); //github第一次报错
+    total = Math.ceil(150 / page_of_count); //github第一次报错
 
     // 更新总页数
     $total_pagenum.text(total);
